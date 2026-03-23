@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreyAnchor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060a14;--teal:#00d4aa;--red:#f43f5e;--blue:#3b82f6;--purple:#8b5cf6;--amber:#f59e0b;--font:"Poppins",sans-serif;--serif:"Source Serif 4",serif;}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:#fff;overflow-x:hidden;line-height:1.6}
+#bgc{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
+.gd{background:rgba(8,13,26,.42);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.055)}
+.gt{background:rgba(0,212,170,.03);backdrop-filter:blur(16px);border:1px solid rgba(0,212,170,.14)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .3s}
+nav.sc{background:transparent;border-bottom:none;padding:.6rem 1.5rem}
+nav.sc .ni{background:rgba(8,13,26,.55);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.08);border-radius:999px;max-width:1200px;margin:0 auto;padding:.75rem 1.75rem}
+.ni{max-width:1300px;margin:0 auto;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;cursor:pointer}
+.lt{font-size:1.1rem;font-weight:600;color:#fff;letter-spacing:-.04em}
+.lt span{color:var(--teal)}
+.nl{display:flex;align-items:center;gap:2rem}
+.nl a{font-size:.82rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;cursor:pointer}
+.nl a:hover,.nl a.active{color:#fff}
+.nr{display:flex;align-items:center;gap:.5rem}
+.nic{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.8rem;cursor:pointer;transition:all .2s}
+.nic:hover{background:rgba(255,255,255,.1);color:#fff}
+.nla{padding:.3rem .65rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.72rem;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .2s}
+.nla:hover{color:#fff}
+.ndb{display:flex;align-items:center;padding:.4rem 1rem;border-radius:.5rem;background:var(--teal);color:var(--bg);font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s}
+.ndb:hover{background:#00b896;transform:scale(1.03)}
+.nbg{display:none;background:none;border:none;color:#fff;cursor:pointer}
+.mm{display:none;flex-direction:column;gap:.5rem;padding:1rem 2rem 1.5rem;background:rgba(6,10,20,.96);border-top:1px solid rgba(255,255,255,.05)}
+.mm a{font-size:.9rem;color:rgba(255,255,255,.55);text-decoration:none;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer}
+@media(max-width:900px){.nl,.nla{display:none}.nbg{display:flex}}
+.page{display:none;position:relative;z-index:1;min-height:100vh}
+.page.active{display:block}
+footer{background:rgba(6,10,20,.82);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);padding:3.5rem 2rem 1.5rem;position:relative;z-index:1;display:none}
+footer.active{display:block}
+.fi{max-width:1100px;margin:0 auto}
+.ftop{display:flex;justify-content:space-between;flex-wrap:wrap;gap:3rem;margin-bottom:2.5rem}
+.flogo{display:flex;align-items:center;gap:.55rem;margin-bottom:.65rem}
+.flt2{font-size:1.05rem;font-weight:600;color:#fff;letter-spacing:-.04em}
+.flt2 span{color:var(--teal)}
+.ftg{font-size:.75rem;color:rgba(255,255,255,.28);line-height:1.5;max-width:220px}
+.fls{display:flex;gap:3.5rem;flex-wrap:wrap}
+.fcl h4{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);margin-bottom:.9rem;font-weight:500}
+.fcl ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.fcl a{font-size:.8rem;color:rgba(255,255,255,.38);text-decoration:none;cursor:pointer;transition:color .2s}
+.fcl a:hover{color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,.04);padding-top:1.25rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.fbot p{font-size:.7rem;color:rgba(255,255,255,.2)}
+.si{max-width:1100px;margin:0 auto;padding:0 2rem}
+.stag{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:500;margin-bottom:.9rem}
+.stagd{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+h1,h2{font-weight:600;letter-spacing:-.05em;line-height:1.1}
+h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
+h2{font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:.9rem}
+h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(255,255,255,.6)}
+.sub{font-size:.9rem;color:rgba(255,255,255,.45);max-width:560px;line-height:1.65}
+.ctr{text-align:center}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.sec{margin-bottom:4rem}
+/* HOME */
+#home{padding-top:0}
+.hero{min-height:100vh;display:flex;align-items:center;padding:5rem 2rem 3rem}
+.hi{max-width:1300px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.hbadge{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .85rem;border-radius:999px;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.18);font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem}
+.hbdot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hh1{font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.05em;margin-bottom:1.1rem}
+.hh1 .tl{color:var(--teal)}
+.hh1 .it{font-family:var(--serif);font-style:italic;font-weight:400;color:rgba(255,255,255,.8)}
+.hsub{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:420px;margin-bottom:1.75rem}
+.hstats{display:flex;gap:1.5rem;margin-bottom:1.75rem;flex-wrap:wrap}
+.hsv{font-size:1.5rem;font-weight:600;color:var(--teal);letter-spacing:-.03em;line-height:1}
+.hsl{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-top:.2rem}
+.hcta{display:inline-flex;align-items:center;gap:.75rem;padding:.75rem 1.5rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font);margin-bottom:1.25rem}
+.hcta:hover{background:rgba(255,255,255,.1);transform:scale(1.03)}
+.hpills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.pill{padding:.3rem .85rem;border-radius:999px;font-size:.7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
+.pill.act{background:rgba(0,212,170,.08);border-color:rgba(0,212,170,.22);color:var(--teal)}
+.hq{border-top:1px solid rgba(255,255,255,.05);padding-top:1.25rem}
+.qlab{font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:.5rem}
+.qtxt{font-size:.85rem;color:rgba(255,255,255,.78);margin-bottom:.6rem}
+.qtxt em{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.5)}
+.qauth{display:flex;align-items:center;gap:.75rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.22)}
+.qline{flex:1;max-width:40px;height:1px;background:rgba(255,255,255,.15)}
+.hr2{display:flex;flex-direction:column;gap:.75rem}
+.ptable{border-radius:1rem;padding:1.25rem}
+.pth{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:.85rem}
+.pt{width:100%;border-collapse:collapse}
+.pt th{font-size:.58rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.3);padding:.25rem .5rem;text-align:right;font-weight:400}
+.pt th:first-child{text-align:left}
+.pt td{font-size:.75rem;padding:.5rem .5rem;border-top:1px solid rgba(255,255,255,.03);font-family:"Courier New",monospace;text-align:right;color:rgba(255,255,255,.5)}
+.pt td:first-child{color:rgba(255,255,255,.78);font-weight:500;text-align:left}
+.pt td.pos{color:var(--teal);font-weight:600}
+.pt td.tot{color:var(--teal);font-weight:700}
+.hcrow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.hcard{border-radius:1rem;padding:1.1rem}
+.hci{width:34px;height:34px;border-radius:.6rem;background:rgba(0,212,170,.1);display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;color:var(--teal)}
+.hct{font-size:.82rem;font-weight:500;color:#fff;margin-bottom:.3rem}
+.hcd{font-size:.72rem;color:rgba(255,255,255,.42);line-height:1.45}
+@media(max-width:1024px){.hr2{display:none}}
+@media(max-width:768px){.hero{padding:5.5rem 1.25rem 2.5rem}.hi{grid-template-columns:1fr}.hh1{font-size:2.4rem}}
+/* HOME sections */
+.hsec{padding:4rem 2rem}
+.pqp{font-size:.9rem;color:rgba(255,255,255,.52);max-width:660px;margin:0 auto 2.5rem;line-height:1.78;text-align:center}
+.tcard{border-radius:1.5rem;padding:2rem 2.25rem;max-width:740px;margin:0 auto 2.5rem;text-align:left}
+.tct{font-size:1.05rem;font-weight:500;color:#fff;margin-bottom:1rem}
+.tct .tl{color:var(--teal)}
+.tcp{font-size:.85rem;color:rgba(255,255,255,.52);line-height:1.78;margin-bottom:.75rem}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;max-width:860px;margin:0 auto;border-radius:1.5rem;overflow:hidden;border:1px solid rgba(255,255,255,.055);background:rgba(255,255,255,.04)}
+.pc{background:rgba(8,13,26,.45);backdrop-filter:blur(20px);padding:2.25rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;transition:background .3s}
+.pc:hover{background:rgba(12,18,34,.58)}
+.pc:nth-child(2){border-left:1px solid rgba(255,255,255,.05)}
+.pc:nth-child(3){border-top:1px solid rgba(255,255,255,.05)}
+.pc:nth-child(4){border-top:1px solid rgba(255,255,255,.05);border-left:1px solid rgba(255,255,255,.05)}
+.piw{width:52px;height:52px;border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.ptitle{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.6rem;letter-spacing:-.01em}
+.pdesc{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.62}
+@media(max-width:600px){.pgrid{grid-template-columns:1fr}.pc:nth-child(2){border-left:none;border-top:1px solid rgba(255,255,255,.05)}.pc:nth-child(4){border-left:none}}
+/* Team on home */
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.tc{border-radius:1.5rem;padding:1.75rem;transition:all .3s;background:rgba(8,13,26,.4);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.055)}
+.tc:hover{transform:translateY(-2px);background:rgba(12,18,34,.52)}
+.tch{display:flex;align-items:center;gap:.85rem;margin-bottom:.85rem}
+.tav{width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.tn2{font-size:1rem;font-weight:600;color:#fff;margin-bottom:.15rem}
+.tr2{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:.35rem}
+.tbadge{display:inline-block;font-size:.55rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.3)}
+.tdesc{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.65}
+.tquote{border-radius:1.25rem;padding:1.5rem 2rem;text-align:center;margin-top:1.5rem;max-width:680px;margin-left:auto;margin-right:auto}
+.tquote p{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.65}
+@media(max-width:700px){.tgrid{grid-template-columns:1fr}}
+/* Models section on home */
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.mcard{border-radius:1.1rem;padding:1.25rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.38);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.05)}
+.mcard:hover{transform:translateY(-3px);background:rgba(12,18,34,.48);border-color:rgba(255,255,255,.1)}
+.mch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem}
+.mn{font-size:.88rem;font-weight:600;color:#fff;letter-spacing:.02em}
+.mkt{font-size:.65rem;color:rgba(255,255,255,.32);margin-top:.2rem}
+.mti{width:30px;height:30px;border-radius:.55rem;background:rgba(0,212,170,.07);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0}
+.mret{font-size:1.6rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:1rem}
+.mstats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;border-top:1px solid rgba(255,255,255,.03);padding-top:.85rem}
+.msl{font-size:.58rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.2rem}
+.msv{font-size:.85rem;font-weight:600;color:rgba(255,255,255,.72)}
+.msv.neg{color:var(--red)}
+@media(max-width:900px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.mgrid{grid-template-columns:1fr}}
+/* Frise howto */
+.fwrap{position:relative;margin-top:2.5rem}
+.fline{position:absolute;top:38px;left:calc(16.66% + .5rem);right:calc(16.66% + .5rem);height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,170,.25),rgba(0,212,170,.25),transparent)}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;z-index:1}
+.scard{border-radius:1.25rem;padding:1.75rem 1.5rem;text-align:center;background:rgba(8,13,26,.38);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.05);transition:all .25s}
+.scard:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1)}
+.snw{display:flex;justify-content:center;margin-bottom:1.25rem}
+.snc{width:52px;height:52px;border-radius:50%;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.18);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.stt{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.6rem}
+.std{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.65}
+@media(max-width:700px){.sgrid{grid-template-columns:1fr}.fline{display:none}}
+/* Overnight */
+.ocard{border-radius:1.5rem;padding:2.25rem 2.5rem;max-width:950px;margin:0 auto}
+.ot{font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:1.1rem;line-height:1.3}
+.ot .tl{color:var(--teal)}
+.op{font-size:.85rem;color:rgba(255,255,255,.52);line-height:1.8;margin-bottom:1.5rem;max-width:700px}
+.opills{display:flex;flex-wrap:wrap;gap:.5rem}
+.opill{padding:.35rem .85rem;border-radius:999px;font-size:.7rem;background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.16);color:var(--teal)}
+/* TARIFS page */
+.ppg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.ppc{border-radius:1.5rem;padding:1.75rem 1.5rem;display:flex;flex-direction:column;position:relative;transition:transform .25s}
+.ppc:hover{transform:translateY(-4px)}
+.ppc.pb{background:rgba(8,13,26,.42);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.06)}
+.ppc.pr{background:rgba(0,212,170,.05);backdrop-filter:blur(18px);border:1px solid rgba(0,212,170,.28);box-shadow:0 0 40px rgba(0,212,170,.07)}
+.ppc.pg{background:rgba(245,158,11,.04);backdrop-filter:blur(18px);border:1px solid rgba(245,158,11,.25);box-shadow:0 0 40px rgba(245,158,11,.07)}
+.ptl{position:absolute;top:0;left:0;right:0;height:2px;border-radius:1.5rem 1.5rem 0 0}
+.pptag{display:inline-block;font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;padding:.25rem .65rem;border-radius:999px;font-weight:600;margin-bottom:1rem;height:22px}
+.pptag.rc{background:rgba(0,212,170,.12);color:var(--teal);border:1px solid rgba(0,212,170,.25)}
+.pptag.gp{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.25)}
+.pptag.em{background:transparent;border:none}
+.ppn{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.25rem}
+.ppa{font-size:.78rem;font-weight:500;margin-bottom:.75rem}
+.ppd{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.5;margin-bottom:1.5rem;flex:1}
+.ppv{font-size:2.4rem;font-weight:700;letter-spacing:-.04em;line-height:1}
+.ppp{font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.2rem;margin-bottom:1.5rem}
+.pbtn{display:flex;align-items:center;justify-content:center;padding:.7rem 1rem;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;border:none;text-decoration:none}
+.pbtn.bb{background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.12)}
+.pbtn.bb:hover{background:rgba(255,255,255,.12);color:#fff}
+.pbtn.rb{background:var(--teal);color:var(--bg)}
+.pbtn.rb:hover{background:#00b896;transform:scale(1.03)}
+.pbtn.gb{background:var(--amber);color:var(--bg)}
+.pbtn.gb:hover{background:#e08e00;transform:scale(1.03)}
+@media(max-width:900px){.ppg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ppg{grid-template-columns:1fr}}
+.strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.5rem;padding:1.1rem 2rem;border-radius:1rem;margin-bottom:3rem}
+.si-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:rgba(255,255,255,.6)}
+.si-item svg{color:var(--teal);flex-shrink:0}
+.si-sep{width:1px;height:16px;background:rgba(255,255,255,.1)}
+@media(max-width:600px){.si-sep{display:none}}
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-bottom:3rem}
+.ic2{border-radius:1.1rem;padding:1.35rem;display:flex;gap:1rem;align-items:flex-start}
+.ii{width:38px;height:38px;border-radius:.75rem;background:rgba(0,212,170,.08);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0}
+.it2{font-size:.82rem;font-weight:600;color:#fff;margin-bottom:.25rem}
+.id2{font-size:.75rem;color:rgba(255,255,255,.42);line-height:1.5}
+@media(max-width:700px){.ig{grid-template-columns:1fr}}
+.bg2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.75rem}
+.bc{border-radius:1.25rem;padding:1.5rem}
+.bnum{font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:600;margin-bottom:.65rem}
+.btt{font-size:.9rem;font-weight:500;color:#fff;margin-bottom:.4rem}
+.bd{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.6}
+.bopt{font-size:.68rem;color:var(--amber);font-weight:500;margin-bottom:.3rem}
+.gnote{border-radius:1rem;padding:1.1rem 1.5rem;margin-top:1.25rem;display:flex;align-items:flex-start;gap:.75rem}
+.gnote-i{width:28px;height:28px;border-radius:.5rem;background:rgba(0,212,170,.08);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0;margin-top:.1rem}
+.gnote-t{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.6}
+@media(max-width:700px){.bg2{grid-template-columns:1fr}}
+.dc{border-radius:1.75rem;padding:2.5rem;margin-top:1.75rem;border:1px solid rgba(59,130,246,.15)}
+.dt{font-size:.88rem;color:rgba(255,255,255,.52);line-height:1.78;max-width:720px;margin-bottom:2.5rem}
+.cv{background:rgba(0,0,0,.25);border-radius:1rem;padding:1.5rem;margin-bottom:1.75rem}
+.clabel{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:1.25rem;font-weight:500}
+.crow{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem}
+.cname{font-size:.7rem;font-weight:600;font-family:"Courier New",monospace;letter-spacing:.05em;width:150px;flex-shrink:0}
+.ccells{display:flex;gap:4px;flex:1}
+.cell{flex:1;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;font-family:"Courier New",monospace}
+.cell.p{background:rgba(0,212,170,.18);color:#00d4aa;border:1px solid rgba(0,212,170,.2)}
+.cell.n{background:rgba(244,63,94,.18);color:#f43f5e;border:1px solid rgba(244,63,94,.2)}
+.cc2{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)}
+.cc2l{font-size:.65rem;color:rgba(255,255,255,.3);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.cc2r{display:flex;gap:4px}
+.cce{flex:1;height:22px;border-radius:3px}
+.cnote{font-size:.68rem;color:rgba(255,255,255,.25);margin-top:.85rem;font-style:italic}
+.dp{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:2rem}
+.dpi{border-radius:.85rem;padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.65rem;background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.1)}
+.dpd{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:.45rem}
+.dpt{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5}
+@media(max-width:600px){.dp{grid-template-columns:1fr}}
+/* ALGOS page */
+.agroup{margin-bottom:3rem}
+.agroup-title{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+.agroup-bar{width:4px;height:24px;border-radius:2px}
+.agroup-label{font-size:1.1rem;font-weight:600}
+.acard{border-radius:1.25rem;padding:1.5rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.38);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.05);margin-bottom:.85rem}
+.acard:hover{transform:translateY(-2px);background:rgba(12,18,34,.48)}
+.acard-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.acard-left h3{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.02em;margin-bottom:.2rem}
+.acard-left p{font-size:.7rem;color:rgba(255,255,255,.35)}
+.acard-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.25rem .65rem;border-radius:999px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);color:var(--teal)}
+.acard-ret{font-size:1.8rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:1.1rem}
+.acard-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;border-top:1px solid rgba(255,255,255,.04);padding-top:1rem}
+.ast-l{font-size:.58rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.3rem}
+.ast-v{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.75)}
+.ast-v.neg{color:var(--red)}
+.ast-v.pos{color:var(--teal)}
+@media(max-width:700px){.acard-stats{grid-template-columns:repeat(3,1fr)}}
+/* FAQ */
+.fcat{margin-bottom:2.5rem}
+.fcat-title{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.fcat-bar{width:3px;height:18px;border-radius:2px}
+.fitem{border-bottom:1px solid rgba(255,255,255,.05)}
+.fq{width:100%;text-align:left;padding:1rem 0;color:rgba(255,255,255,.75);font-size:.85rem;font-weight:500;background:none;border:none;cursor:pointer;font-family:var(--font);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.fq:hover{color:#fff}
+.fchev{transition:transform .25s;color:rgba(255,255,255,.3);flex-shrink:0;font-size:1rem}
+.fitem.open .fchev{transform:rotate(180deg)}
+.fans{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.65;padding-bottom:1rem;display:none}
+.fitem.open .fans{display:block}
+/* CONTACT */
+.cform{border-radius:1.5rem;padding:2rem;max-width:640px;margin:0 auto}
+.cform label{display:block;font-size:.75rem;color:rgba(255,255,255,.45);margin-bottom:.4rem;font-weight:500}
+.cform input,.cform textarea,.cform select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:.75rem 1rem;color:#fff;font-family:var(--font);font-size:.85rem;outline:none;transition:border .2s;margin-bottom:1.25rem}
+.cform input:focus,.cform textarea:focus{border-color:rgba(0,212,170,.35)}
+.cform input::placeholder,.cform textarea::placeholder{color:rgba(255,255,255,.2)}
+.cform textarea{resize:vertical;min-height:130px}
+.crow2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:560px){.crow2{grid-template-columns:1fr}}
+.csubmit{width:100%;padding:.85rem;border-radius:999px;background:var(--teal);color:var(--bg);font-size:.85rem;font-weight:600;border:none;cursor:pointer;font-family:var(--font);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.csubmit:hover{background:#00b896;transform:scale(1.02)}
+.csent{text-align:center;padding:3rem 2rem;display:none}
+.csent.show{display:block}
+/* EQUIPE page */
+.eq-full{margin-top:2rem}
+.eq-card{border-radius:1.5rem;padding:2rem;background:rgba(8,13,26,.42);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.055);margin-bottom:1.25rem}
+.eq-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.eq-av{width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.eq-name{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.eq-role{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:.3rem}
+.eq-intro{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:1.25rem}
+.eq-resp{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.eq-resp li{display:flex;align-items:flex-start;gap:.65rem;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
+.eq-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:.45rem}
+.eq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:700px){.eq-grid{grid-template-columns:1fr}}
+/* Process */
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.proc-card{border-radius:1.25rem;padding:1.5rem;position:relative;overflow:hidden}
+.proc-num{font-size:3rem;font-weight:700;line-height:1;color:rgba(255,255,255,.04);position:absolute;top:.75rem;right:1rem}
+.proc-who{display:inline-block;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .6rem;border-radius:999px;font-weight:600;margin-bottom:.75rem}
+.proc-title{font-size:.88rem;font-weight:600;color:#fff;margin-bottom:.5rem}
+.proc-desc{font-size:.75rem;color:rgba(255,255,255,.42);line-height:1.6}
+@media(max-width:700px){.proc-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.proc-steps{grid-template-columns:1fr}}
+.disc{border-radius:1.25rem;padding:1.5rem 1.75rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(244,63,94,.04);border:1px solid rgba(244,63,94,.15)}
+.disc-i{width:32px;height:32px;border-radius:.6rem;background:rgba(244,63,94,.08);display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0}
+.disc-t{font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.65}
+
+.algo-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.algo-add-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.5rem;border-radius:.6rem;background:var(--teal);color:var(--bg);font-size:.85rem;font-weight:600;cursor:pointer;font-family:var(--font);border:none;transition:all .2s;flex-shrink:0;margin-top:.5rem}
+.algo-add-btn:hover{background:#00b896;transform:scale(1.03)}
+.algo-stats-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:2rem}
+.algo-stat-box{background:rgba(8,13,26,.5);border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1rem;text-align:center}
+.asb-label{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:.4rem}
+.asb-val{font-size:1.1rem;font-weight:700;color:#fff}
+.asb-val.teal{color:var(--teal)}.asb-val.red{color:var(--red)}.asb-val.blue{color:var(--blue)}
+@media(max-width:900px){.algo-stats-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.algo-stats-strip{grid-template-columns:repeat(2,1fr)}}
+.chart-card{background:rgba(8,13,26,.45);border:1px solid rgba(255,255,255,.06);border-radius:1.25rem;padding:1.25rem;margin-bottom:1.25rem}
+.chart-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+.chart-title span{color:var(--teal);text-transform:none;letter-spacing:0;font-size:.7rem}
+.annual-bars{display:flex;align-items:flex-end;gap:.5rem;height:120px;padding-top:.5rem}
+.annual-bar-wrap{display:flex;flex-direction:column;align-items:center;flex:1;gap:.35rem}
+.annual-bar{width:100%;border-radius:4px 4px 0 0;min-height:4px}
+.annual-year{font-size:.6rem;color:rgba(255,255,255,.3)}
+.annual-val{font-size:.62rem;font-weight:700}
+.trades-table{width:100%;border-collapse:collapse;font-size:.75rem}
+.trades-table th{font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);padding:.4rem .6rem;text-align:left;font-weight:400;border-bottom:1px solid rgba(255,255,255,.06)}
+.trades-table td{padding:.55rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:rgba(255,255,255,.65);font-family:"Courier New",monospace}
+.trades-table tr:last-child td{border-bottom:none}
+.algo-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:rgba(255,255,255,.4);cursor:pointer;margin-bottom:1.5rem;transition:color .2s}
+.algo-back:hover{color:#fff}
+</style></head><body><canvas id="bgc"></canvas>
+<div id="cart-overlay" onclick="closeCart()" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s"></div>
+<div id="cart-panel" style="position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#080d1a;border-left:1px solid rgba(255,255,255,.07);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column">
+  <div style="padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span style="font-size:.95rem;font-weight:600;color:#fff">Mon panier</span><span id="cart-count" style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--teal);color:var(--bg);font-size:.65rem;font-weight:700">0</span></div>
+    <div onclick="closeCart()" style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.5)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+  </div>
+  <div id="cart-body" style="flex:1;overflow-y:auto;padding:1.25rem 1.5rem"><div id="cart-empty" style="text-align:center;padding:3rem 1rem;color:rgba(255,255,255,.3)"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="margin-bottom:1rem;opacity:.3"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p style="font-size:.85rem">Votre panier est vide</p><p style="font-size:.75rem;margin-top:.4rem;color:rgba(255,255,255,.2)">Ajoutez une formule depuis la page Tarifs</p></div></div>
+  <div style="padding:1.25rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0">
+    <div id="cart-summary" style="display:none;margin-bottom:1rem"><div style="display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,.45);margin-bottom:.4rem"><span>Sous-total</span><span id="cart-subtotal">0€</span></div><div style="display:flex;justify-content:space-between;font-size:.9rem;color:#fff;font-weight:600;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.06)"><span>Total / mois</span><span id="cart-total">0€</span></div></div>
+    <button id="cart-btn" disabled onclick="go('contact')" style="width:100%;padding:.85rem;border-radius:999px;background:var(--teal);color:var(--bg);font-size:.88rem;font-weight:600;border:none;cursor:pointer;font-family:var(--font);transition:all .2s;opacity:.4">Procéder au paiement</button>
+  </div>
+</div>
+<nav id="nav">
+<div class="ni">
+  <div class="logo" onclick="go('home')">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#fff"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+    <span class="lt">Grey<span>Anchor</span></span>
+  </div>
+  <div class="nl">
+    <a onclick="go('algos')" id="nl-algos">Algorithmes</a>
+    <a onclick="go('equipe')" id="nl-equipe">Équipe</a>
+    <a onclick="go('tarifs')" id="nl-tarifs">Tarifs</a>
+  </div>
+  <div class="nr">
+    
+    <div class="nic" onclick="go('faq')">?</div>
+    <div class="nic" onclick="openCart()" style="position:relative"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span id="cart-badge" style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--teal);color:var(--bg);font-size:.55rem;font-weight:700;display:none;align-items:center;justify-content:center"></span></div>
+    <div class="ndb" onclick="go('dashboard')">Dashboard</div>
+  </div>
+  <button class="nbg" onclick="tmm()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</div>
+<div class="mm" id="mm">
+  <a onclick="go('algos');tmm()">Algorithmes</a>
+  <a onclick="go('equipe');tmm()">Équipe</a>
+  <a onclick="go('tarifs');tmm()">Tarifs</a>
+  <a onclick="go('faq');tmm()">FAQ</a>
+  <a onclick="go('contact');tmm()">Contact</a>
+</div>
+</nav><div id="page-home" class="page active">
+<div class="hero">
+  <div class="hi">
+    <div>
+      <div class="hbadge"><div class="hbdot"></div><span>Données de performance en direct</span></div>
+      <h1 class="hh1">Algorithmes<br>de trading <span class="tl">systématiques.</span><br><span class="it">Transparents. Mesurables.</span></h1>
+      <p class="hsub">GreyAnchor conçoit des modèles basés sur des règles et publie leurs performances en temps réel. Aucune promesse. Seulement des données.</p>
+      <div class="hstats">
+        <div><div class="hsv">+44.6%</div><div class="hsl">Rendement</div></div>
+        <div><div class="hsv">67.2%</div><div class="hsl">Win Rate</div></div>
+        <div><div class="hsv">2.44</div><div class="hsl">Sharpe</div></div>
+        <div><div class="hsv">9</div><div class="hsl">Modèles</div></div>
+      </div>
+      <div class="hcta" onclick="go('algos')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Explorer les modèles</div>
+      <div class="hpills">
+        <span class="pill">Performance Live</span><span class="pill act">Algo Trading</span><span class="pill">Risque Maîtrisé</span><span class="pill">Prop Firm Compatible</span>
+      </div>
+      <div class="hq">
+        <div class="qlab">Approche Systématique</div>
+        <div class="qtxt">"<em>Le marché récompense la discipline,</em> pas l’émotion."</div>
+        <div class="qauth"><div class="qline"></div>GREYANCHOR — PRINCIPE FONDATEUR<div class="qline"></div></div>
+      </div>
+    </div>
+    <div class="hr2">
+      <div class="ptable gd" style="border-radius:1rem">
+        <div class="pth">LIVE · PERFORMANCES</div>
+        <table class="pt">
+          <thead><tr><th>MODEL</th><th>TRD/SEM</th><th>TRD/MOIS</th><th>SEM</th><th>MOIS</th><th>TOTAL</th></tr></thead>
+          <tbody>
+            <tr><td>ANCHOR-ALPHA</td><td>4</td><td>17</td><td class="pos">+1.2%</td><td class="pos">+8.4%</td><td class="tot">+38.4%</td></tr>
+            <tr><td>ANCHOR-DELTA</td><td>6</td><td>22</td><td class="pos">+2.1%</td><td class="pos">+11.2%</td><td class="tot">+44.6%</td></tr>
+            <tr><td>ANCHOR-ETA</td><td>3</td><td>14</td><td class="pos">+0.9%</td><td class="pos">+7.1%</td><td class="tot">+36.2%</td></tr>
+            <tr><td>ANCHOR-IOTA</td><td>5</td><td>19</td><td class="pos">+1.5%</td><td class="pos">+5.3%</td><td class="tot">+16.1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hcrow">
+        <div class="hcard gd"><div class="hci"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="hct">Suivi Live</div><div class="hcd">Consultez les résultats de chaque robot jour après jour</div></div>
+        <div class="hcard gd"><div class="hci" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.45)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><div class="hct">Archives Perfs</div><div class="hcd">Tout est visible : aussi bien les gains que les pertes</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hsec" style="padding-top:3rem;background:transparent">
+  <div class="si ctr">
+    <div class="stag rv" style="justify-content:center"><span class="stagd"></span>Notre philosophie</div>
+    <h2 class="rv">Pourquoi <em>GreyAnchor</em> ?</h2>
+    <p class="sub rv" style="margin:0 auto 1.5rem;text-align:center">Pas de promesses. Pas de miracle. Juste des règles, des statistiques, de la régularité, et une totale transparence.</p>
+    <p class="pqp rv">GreyAnchor est né d’une conviction simple : les marchés financiers peuvent être approchés de manière systématique, disciplinée, et reproductible. En tant que traders actifs, nous avons constaté que l’émotion est l’ennemi numéro un de la performance. Les algorithmes, eux, n’ont pas d’émotions. Ils appliquent des règles. Toujours. Sans exception.</p>
+    <div class="tcard gd rv">
+      <div class="tct">"Montez dans le <span class="tl">train</span>"</div>
+      <p class="tcp">Le concept est simple : nos algorithmes tradent en continu. Chaque trade est enregistré. Chaque statistique est visible. Vous ne pariez pas sur un inconnu, vous regardez les rails, vous vérifiez l’historique, et si les chiffres vous conviennent, vous connectez un compte et vous montez dans le train.</p>
+      <p class="tcp">L’algorithme continue son chemin. Vous bénéficiez des mêmes signaux, aux mêmes conditions. Pas de magie. Juste de la réplication.</p>
+    </div>
+    <div class="pgrid rv">
+      <div class="pc"><div class="piw" style="background:rgba(0,212,170,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="ptitle">Transparence totale</div><div class="pdesc">Tous les trades sont visibles depuis le premier jour. Win, loss, drawdown, tout est là. Rien n’est caché.</div></div>
+      <div class="pc"><div class="piw" style="background:rgba(59,130,246,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="ptitle">La donnée avant tout</div><div class="pdesc">Statistiques vérifiables : taux de gain, ratio risque/rendement, Sharpe ratio, drawdown maximum.</div></div>
+      <div class="pc"><div class="piw" style="background:rgba(139,92,246,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="ptitle">Votre capital, votre contrôle</div><div class="pdesc">Vous connectez votre propre compte. Vous pouvez stopper à tout moment. Nous n’avons aucun accès à vos fonds.</div></div>
+      <div class="pc"><div class="piw" style="background:rgba(245,158,11,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ptitle">Un complément, pas un substitut</div><div class="pdesc">GreyAnchor tourne en parallèle de votre activité principale. Un side business algorithmique.</div></div>
+    </div>
+  </div>
+</div>
+<div class="hsec" style="background:transparent">
+  <div class="si">
+    <div class="ctr rv">
+      <div class="stag" style="justify-content:center"><span class="stagd"></span>Notre processus</div>
+      <h2>L’équipe derrière <em>tout ça</em></h2>
+      <p class="sub" style="margin:0 auto 2rem;text-align:center">De l’idée à la mise en production, chaque étape est validée en binôme.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tc rv">
+        <div class="tch"><div class="tav" style="border:1.5px solid #00d4aa33">
+<svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+<rect width="54" height="54" fill="rgba(0,212,170,0.1)"/>
+<ellipse cx="27" cy="40" rx="16" ry="10" fill="#00d4aa33"/>
+<circle cx="27" cy="21" r="11" fill="#00d4aa55"/>
+<circle cx="22.5" cy="20" r="1.8" fill="#00d4aa"/>
+<circle cx="31.5" cy="20" r="1.8" fill="#00d4aa"/>
+<path d="M22 25.5 Q27 29 32 25.5" stroke="#00d4aa" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</svg></div><div><div class="tn2">Rémi</div><div class="tr2" style="color:var(--teal)">Trader &amp; Analyste</div><span class="tbadge">GREYANCHOR</span></div></div>
+        <p class="tdesc">Rémi apporte l’expertise de terrain. Trader actif depuis plusieurs années, il est responsable de la logique des modèles : identifier les inefficiences de marché, définir les règles d’entrée et de sortie, et valider statistiquement chaque stratégie avant qu’elle ne soit déployée.</p>
+      </div>
+      <div class="tc rv d1">
+        <div class="tch"><div class="tav" style="border:1.5px solid #3b82f633">
+<svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+<rect width="54" height="54" fill="rgba(59,130,246,0.1)"/>
+<ellipse cx="27" cy="40" rx="16" ry="10" fill="#3b82f633"/>
+<circle cx="27" cy="21" r="11" fill="#3b82f655"/>
+<circle cx="22.5" cy="20" r="1.8" fill="#3b82f6"/>
+<circle cx="31.5" cy="20" r="1.8" fill="#3b82f6"/>
+<path d="M22 25.5 Q27 29 32 25.5" stroke="#3b82f6" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</svg></div><div><div class="tn2">Guillaume</div><div class="tr2" style="color:var(--blue)">Développeur Algorithmique</div><span class="tbadge">GREYANCHOR</span></div></div>
+        <p class="tdesc">Guillaume traduit les idées de trading en code fiable et en infrastructure robuste. Il est responsable de tout ce qui tourne en coulisses : l’implémentation des algorithmes, la connexion aux brokers, la surveillance des systèmes.</p>
+      </div>
+      <div class="tc rv d2">
+        <div class="tch"><div class="tav" style="border:1.5px solid #8b5cf633">
+<svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+<rect width="54" height="54" fill="rgba(139,92,246,0.1)"/>
+<ellipse cx="27" cy="40" rx="16" ry="10" fill="#8b5cf633"/>
+<circle cx="27" cy="21" r="11" fill="#8b5cf655"/>
+<circle cx="22.5" cy="20" r="1.8" fill="#8b5cf6"/>
+<circle cx="31.5" cy="20" r="1.8" fill="#8b5cf6"/>
+<path d="M22 25.5 Q27 29 32 25.5" stroke="#8b5cf6" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</svg></div><div><div class="tn2">Félix</div><div class="tr2" style="color:var(--purple)">Data Scientist &amp; Optimisation</div><span class="tbadge">GREYANCHOR</span></div></div>
+        <p class="tdesc">Félix est responsable de l’analyse avancée des données et de l’optimisation continue des modèles. Il applique des méthodes quantitatives rigoureuses pour affiner les paramètres des stratégies et détecter les biais dans les backtests.</p>
+      </div>
+      <div class="tc rv d3">
+        <div class="tch"><div class="tav" style="border:1.5px solid #f59e0b33">
+<svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+<rect width="54" height="54" fill="rgba(245,158,11,0.1)"/>
+<ellipse cx="27" cy="40" rx="16" ry="10" fill="#f59e0b33"/>
+<circle cx="27" cy="21" r="11" fill="#f59e0b55"/>
+<circle cx="22.5" cy="20" r="1.8" fill="#f59e0b"/>
+<circle cx="31.5" cy="20" r="1.8" fill="#f59e0b"/>
+<path d="M22 25.5 Q27 29 32 25.5" stroke="#f59e0b" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</svg></div><div><div class="tn2">Hugo</div><div class="tr2" style="color:var(--amber)">DevOps &amp; Infrastructure Cloud</div><span class="tbadge">GREYANCHOR</span></div></div>
+        <p class="tdesc">Hugo assure la fiabilité et la sécurité de toute l’infrastructure qui fait tourner les robots en production. Il gère les serveurs, les pipelines de déploiement et la cybersécurité.</p>
+      </div>
+    </div>
+    <div class="tquote gd rv"><p>"Rien ne passe en production sans que les deux aient validé. C’est cette rigueur à chaque étape qui garantit l’intégrité de nos modèles."</p></div>
+  </div>
+</div>
+<div class="hsec" style="background:transparent">
+  <div class="si">
+    <div class="rv" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+      <div><div class="stag"><span class="stagd"></span>Bibliothèque complète</div><h2 style="margin-bottom:.4rem">Nos <em>modèles</em></h2><p style="font-size:.83rem;color:rgba(255,255,255,.38)">Tous les modèles GreyAnchor. Performances en temps réel.</p></div>
+      <div onclick="go('algos')" style="display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:999px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.18);color:var(--teal);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s">Voir tous les modèles →</div>
+    </div>
+    <div class="mgrid rv">
+      <div class="mcard"><div class="mch"><div><div class="mn">ANCHOR-ALPHA</div><div class="mkt">YM1/US30</div></div><div class="mti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div></div><div class="mret">+38.4%</div><div class="mstats"><div><div class="msl">Win Rate</div><div class="msv">67.2%</div></div><div><div class="msl">Sharpe</div><div class="msv">2.01</div></div><div><div class="msl">DD</div><div class="msv neg">-7.8%</div></div></div></div>
+      <div class="mcard"><div class="mch"><div><div class="mn">ANCHOR-DELTA</div><div class="mkt">NQ1/NAS100</div></div><div class="mti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div></div><div class="mret">+44.6%</div><div class="mstats"><div><div class="msl">Win Rate</div><div class="msv">65.8%</div></div><div><div class="msl">Sharpe</div><div class="msv">1.92</div></div><div><div class="msl">DD</div><div class="msv neg">-9.1%</div></div></div></div>
+      <div class="mcard"><div class="mch"><div><div class="mn">ANCHOR-IOTA</div><div class="mkt">ES1/SPX500</div></div><div class="mti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div></div><div class="mret">+16.1%</div><div class="mstats"><div><div class="msl">Win Rate</div><div class="msv">73.2%</div></div><div><div class="msl">Sharpe</div><div class="msv">2.44</div></div><div><div class="msl">DD</div><div class="msv neg">-4.9%</div></div></div></div>
+    </div>
+  </div>
+</div>
+<div class="hsec" style="background:transparent;padding-top:0">
+  <div class="si">
+    <div class="ctr rv">
+      <div class="stag" style="justify-content:center"><span class="stagd"></span>Guide complet</div>
+      <h2>Comment ça <em>fonctionne</em> ?</h2>
+      <p class="sub" style="margin:0 auto 0;text-align:center">De zéro à votre premier algorithme actif. Trois étapes simples.</p>
+    </div>
+    <div class="fwrap rv">
+      <div class="fline"></div>
+      <div class="sgrid">
+        <div class="scard"><div class="snw"><div class="snc"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div><div class="stt">Choisissez vos algorithmes</div><div class="std">Sélectionnez un ou plusieurs algorithmes selon votre profil de risque et les marchés que vous tradez.</div></div>
+        <div class="scard"><div class="snw"><div class="snc"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div></div><div class="stt">Installation sur MetaTrader</div><div class="std">Vous recevez le fichier .ex5 prêt à l’emploi. Glissez-le dans votre MT4/5, configurez le risque, activez.</div></div>
+        <div class="scard"><div class="snw"><div class="snc"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div></div><div class="stt">L’algo trade pour vous</div><div class="std">24h/24, 5j/7, l’algorithme exécute chaque signal selon ses règles strictes. Stats en temps réel.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hsec" style="background:transparent;padding-top:2rem">
+  <div class="si rv">
+    <div class="ocard gt">
+      <div class="ot">Zéro overnight. Zéro over-weekend. <span class="tl">Zéro news.</span></div>
+      <p class="op">Tous nos algorithmes sont conçus pour clore toute position avant 21h30. Cette règle stricte élimine toute exposition aux gaps overnight et du week-end. Nos algorithmes évitent également de prendre position lors des publications économiques majeures. Les news créent un aléatoire non mesurable qui fausse les exécutions et pollue les statistiques, nous ne jouons pas ce jeu.</p>
+      <div class="opills">
+        <span class="opill">Clôture avant 21h30</span><span class="opill">Zéro overnight</span><span class="opill">Zéro over-weekend</span><span class="opill">Gap du lundi couvert</span><span class="opill">News économiques évitées</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><div id="page-algos" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="ctr" style="margin-bottom:2.5rem"><div class="stag" style="justify-content:center"><span class="stagd"></span>Bibliothèque complète</div><h1>Collection de <em>Modèles</em></h1></div>
+  <div style="border-radius:1.5rem;padding:2rem;margin-bottom:2.5rem;border:1px solid rgba(0,212,170,.15);background:rgba(0,212,170,.02)">
+    <div class="stag"><span class="stagd"></span>Comment bien choisir votre algorithme ?</div>
+    <p style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6;margin-top:.5rem;margin-bottom:1.5rem">Prenez en compte l’ensemble des paramètres avant de vous décider. Chaque métrique raconte une partie de l’histoire, pas toute l’histoire.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="border-radius:1.1rem;padding:1.35rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.12)"><div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem"><div style="width:32px;height:32px;border-radius:.6rem;background:rgba(245,158,11,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><span style="font-size:.82rem;font-weight:600;color:var(--amber)">1. Le drawdown : comprendre le risque</span></div><div style="font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.65"><p style="margin-bottom:.5rem">Le drawdown représente la baisse maximale qu’un modèle a connue. Un modèle avec un drawdown plus faible sera généralement plus stable psychologiquement.</p><p>Un drawdown plus important peut signifier des rendements plus élevés, mais demande une plus grande tolérance au risque.</p></div></div>
+      <div style="border-radius:1.1rem;padding:1.35rem;background:rgba(0,212,170,.03);border:1px solid rgba(0,212,170,.1)"><div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem"><div style="width:32px;height:32px;border-radius:.6rem;background:rgba(0,212,170,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div><span style="font-size:.82rem;font-weight:600;color:var(--teal)">2. Le ratio rendement / risque</span></div><div style="font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.65"><p style="margin-bottom:.5rem">Certains algorithmes prennent peu de trades mais cherchent des gains plus importants. D’autres privilégient une fréquence plus élevée.</p><p>Un bon ratio signifie que les gains moyens compensent largement les pertes.</p></div></div>
+      <div style="border-radius:1.1rem;padding:1.35rem;background:rgba(59,130,246,.03);border:1px solid rgba(59,130,246,.1)"><div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem"><div style="width:32px;height:32px;border-radius:.6rem;background:rgba(59,130,246,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span style="font-size:.82rem;font-weight:600;color:var(--blue)">3. La fréquence des trades</span></div><div style="font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.65"><p style="margin-bottom:.5rem">Certains modèles prennent très peu de positions mais attendent des configurations précises. D’autres sont plus actifs.</p><p>La fréquence doit correspondre à votre style et à votre confort.</p></div></div>
+      <div style="border-radius:1.1rem;padding:1.35rem;background:rgba(139,92,246,.03);border:1px solid rgba(139,92,246,.1)"><div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem"><div style="width:32px;height:32px;border-radius:.6rem;background:rgba(139,92,246,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><span style="font-size:.82rem;font-weight:600;color:var(--purple)">4. La stabilité dans le temps</span></div><div style="font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.65"><p style="margin-bottom:.5rem">La performance brute n’est pas toujours le critère le plus important. La stabilité des résultats dans le temps est souvent plus précieuse.</p><p>Un modèle stable est plus facile à suivre psychologiquement sur le long terme.</p></div></div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:.65rem;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)"><span style="color:var(--teal);font-weight:600;flex-shrink:0">→</span><span style="font-size:.85rem;font-weight:500;color:rgba(255,255,255,.8);line-height:1.5">Combiner plusieurs algorithmes permet de couvrir différents régimes de marché et de lisser votre performance globale. Cliquez sur un modèle pour voir ses statistiques détaillées.</span></div>
+  </div>
+  <div class="agroup" style="margin-bottom:2rem">
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--teal)"></div><span class="agroup-label" style="color:var(--teal)">YM1, Dow Jones</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+      <div onclick="go('algo-alpha')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--teal);letter-spacing:.02em">ANCHOR-ALPHA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Jan 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+38.4%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">67.2%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.01</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-7.8%</div></div></div></div>
+      <div onclick="go('algo-beta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--teal);letter-spacing:.02em">ANCHOR-BETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Mar 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+28.7%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">71.3%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.24</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-5.6%</div></div></div></div>
+      <div onclick="go('algo-gamma')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--teal);letter-spacing:.02em">ANCHOR-GAMMA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Jun 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+21.3%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">58.4%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.58</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-10.2%</div></div></div></div>
+    </div>
+  </div>
+  <div class="agroup" style="margin-bottom:2rem">
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--purple)"></div><span class="agroup-label" style="color:var(--purple)">NQ1, Nasdaq</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+      <div onclick="go('algo-delta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.02em">ANCHOR-DELTA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Jan 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+44.6%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">65.8%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.92</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-9.1%</div></div></div></div>
+      <div onclick="go('algo-epsilon')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.02em">ANCHOR-EPSILON</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Avr 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+31.8%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">62.4%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.74</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-8.4%</div></div></div></div>
+      <div onclick="go('algo-zeta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.02em">ANCHOR-ZETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Aoû 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+19.4%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">69.7%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.18</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-6.1%</div></div></div></div>
+    </div>
+  </div>
+  <div class="agroup" style="margin-bottom:2rem">
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--amber)"></div><span class="agroup-label" style="color:var(--amber)">ES1, S&amp;P 500</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+      <div onclick="go('algo-eta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--amber);letter-spacing:.02em">ANCHOR-ETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Fév 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+36.2%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">70.1%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.09</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-6.8%</div></div></div></div>
+      <div onclick="go('algo-theta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--amber);letter-spacing:.02em">ANCHOR-THETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Mai 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+27.9%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">61.8%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.61</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-11.3%</div></div></div></div>
+      <div onclick="go('algo-iota')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--amber);letter-spacing:.02em">ANCHOR-IOTA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Sep 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+16.1%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">73.2%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.44</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-4.9%</div></div></div></div>
+    </div>
+  </div>
+  <div style="border-radius:1.5rem;padding:1.35rem 1.75rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;background:rgba(0,212,170,.04);border:1px solid rgba(0,212,170,.18)"><div style="width:42px;height:42px;border-radius:.85rem;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div style="flex:1;min-width:200px"><div style="font-size:.88rem;font-weight:600;color:#fff;margin-bottom:.25rem">Vous gardez le contrôle</div><div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.5">Vous êtes 100% maître de votre algo : activation, mise en pause, arrêt, paramétrage complet. À tout moment, depuis MetaTrader.</div></div><div style="display:flex;flex-wrap:wrap;gap:.5rem"><span style="padding:.3rem .85rem;border-radius:999px;font-size:.68rem;font-weight:500;color:var(--teal);background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.22)">Activation</span><span style="padding:.3rem .85rem;border-radius:999px;font-size:.68rem;font-weight:500;color:var(--teal);background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.22)">Déconnexion</span><span style="padding:.3rem .85rem;border-radius:999px;font-size:.68rem;font-weight:500;color:var(--teal);background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.22)">Paramétrage complet</span></div></div>
+  <div class="disc"><div class="disc-i"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><p class="disc-t">Le trading implique un risque total ou partiel des pertes. Les performances passées ne garantissent pas les résultats futurs. Rien sur ce site ne constitue un conseil financier.</p></div>
+</div></div></div><div id="page-equipe" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="ctr" style="margin-bottom:2rem">
+    <div class="stag" style="justify-content:center"><span class="stagd"></span>Les personnes derrière les modèles</div>
+    <h1>L’<em>Équipe</em></h1>
+  </div>
+  <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:1.5rem;padding:2rem 2.25rem;margin-bottom:3rem">
+    <div class="stag" style="margin-bottom:1rem"><span class="stagd"></span>Notre approche</div>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:1rem">Nous évoluons sur les marchés financiers depuis plus de dix ans, à travers le trading, l’analyse et le développement de stratégies.</p>
+    <p style="font-size:.88rem;color:rgba(255,255,255,.48);line-height:1.8;margin-bottom:1rem">Au fil du temps, un constat s’est imposé : la difficulté ne vient pas uniquement des marchés, mais surtout de la capacité à appliquer une stratégie avec discipline. L’émotion, l’interprétation et la variabilité humaine rendent l’exécution difficile, même lorsque la logique est pertinente.</p>
+    <p style="font-size:.9rem;font-weight:500;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:1rem;border-left:2px solid var(--teal);padding-left:1rem">C’est de cette réflexion qu’est né GreyAnchor.</p>
+    <p style="font-size:.88rem;color:rgba(255,255,255,.48);line-height:1.8;margin-bottom:1rem">L’objectif n’était pas de créer de nouvelles stratégies, mais de structurer et automatiser des approches existantes, testées et utilisées au quotidien, afin de les exécuter de manière rigoureuse, sans biais émotionnel.</p>
+    <p style="font-size:.88rem;color:rgba(255,255,255,.48);line-height:1.8">GreyAnchor est donc la continuité naturelle de ce parcours : transformer des logiques de trading en modèles systématiques, mesurables et exécutés avec constance.</p>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card"><div class="eq-header"><div style="width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid #00d4aa33"><svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg"><rect width="54" height="54" fill="rgba(0,212,170,0.1)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#00d4aa33"/><circle cx="27" cy="21" r="11" fill="#00d4aa55"/><circle cx="22.5" cy="20" r="1.8" fill="#00d4aa"/><circle cx="31.5" cy="20" r="1.8" fill="#00d4aa"/><path d="M22 25.5 Q27 29 32 25.5" stroke="#00d4aa" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div><div class="eq-name">Rémi</div><div class="eq-role" style="color:var(--teal)">Trader &amp; Analyste</div></div></div><p class="eq-intro">Rémi apporte l’expertise de terrain. Trader actif depuis plusieurs années, il est responsable de la logique des modèles.</p><ul class="eq-resp"><li><span class="eq-dot" style="background:var(--teal)"></span>Conception des logiques de trading</li><li><span class="eq-dot" style="background:var(--teal)"></span>Backtesting rigoureux sur données historiques</li><li><span class="eq-dot" style="background:var(--teal)"></span>Validation statistique : Sharpe, win rate, drawdown</li><li><span class="eq-dot" style="background:var(--teal)"></span>Gestion du risque et dimensionnement</li></ul></div>
+    <div class="eq-card"><div class="eq-header"><div style="width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid #3b82f633"><svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg"><rect width="54" height="54" fill="rgba(59,130,246,0.1)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#3b82f633"/><circle cx="27" cy="21" r="11" fill="#3b82f655"/><circle cx="22.5" cy="20" r="1.8" fill="#3b82f6"/><circle cx="31.5" cy="20" r="1.8" fill="#3b82f6"/><path d="M22 25.5 Q27 29 32 25.5" stroke="#3b82f6" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div><div class="eq-name">Guillaume</div><div class="eq-role" style="color:var(--blue)">Développeur Algorithmique</div></div></div><p class="eq-intro">Guillaume traduit les idées de trading en code fiable. Il est responsable de tout ce qui tourne en coulisses.</p><ul class="eq-resp"><li><span class="eq-dot" style="background:var(--blue)"></span>Implémentation des algorithmes en MQL5/Python</li><li><span class="eq-dot" style="background:var(--blue)"></span>Connexion aux brokers et flux de données</li><li><span class="eq-dot" style="background:var(--blue)"></span>Monitoring temps réel et alertes</li><li><span class="eq-dot" style="background:var(--blue)"></span>Développement de la plateforme</li></ul></div>
+    <div class="eq-card"><div class="eq-header"><div style="width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid #8b5cf633"><svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg"><rect width="54" height="54" fill="rgba(139,92,246,0.1)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#8b5cf633"/><circle cx="27" cy="21" r="11" fill="#8b5cf655"/><circle cx="22.5" cy="20" r="1.8" fill="#8b5cf6"/><circle cx="31.5" cy="20" r="1.8" fill="#8b5cf6"/><path d="M22 25.5 Q27 29 32 25.5" stroke="#8b5cf6" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div><div class="eq-name">Félix</div><div class="eq-role" style="color:var(--purple)">Data Scientist &amp; Optimisation</div></div></div><p class="eq-intro">Félix est responsable de l’analyse avancée des données et de l’optimisation continue des modèles.</p><ul class="eq-resp"><li><span class="eq-dot" style="background:var(--purple)"></span>Analyse quantitative et optimisation</li><li><span class="eq-dot" style="background:var(--purple)"></span>Détection des biais de backtest</li><li><span class="eq-dot" style="background:var(--purple)"></span>Stress testing des stratégies</li><li><span class="eq-dot" style="background:var(--purple)"></span>Reporting analytique</li></ul></div>
+    <div class="eq-card"><div class="eq-header"><div style="width:54px;height:54px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid #f59e0b33"><svg viewBox="0 0 54 54" width="54" height="54" xmlns="http://www.w3.org/2000/svg"><rect width="54" height="54" fill="rgba(245,158,11,0.1)"/><ellipse cx="27" cy="40" rx="16" ry="10" fill="#f59e0b33"/><circle cx="27" cy="21" r="11" fill="#f59e0b55"/><circle cx="22.5" cy="20" r="1.8" fill="#f59e0b"/><circle cx="31.5" cy="20" r="1.8" fill="#f59e0b"/><path d="M22 25.5 Q27 29 32 25.5" stroke="#f59e0b" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><div><div class="eq-name">Hugo</div><div class="eq-role" style="color:var(--amber)">DevOps &amp; Infrastructure Cloud</div></div></div><p class="eq-intro">Hugo assure la fiabilité et la sécurité de toute l’infrastructure de production.</p><ul class="eq-resp"><li><span class="eq-dot" style="background:var(--amber)"></span>Gestion des serveurs VPS et cloud</li><li><span class="eq-dot" style="background:var(--amber)"></span>CI/CD : pipelines automatisés</li><li><span class="eq-dot" style="background:var(--amber)"></span>Monitoring et gestion des incidents</li><li><span class="eq-dot" style="background:var(--amber)"></span>Cybersécurité</li></ul></div>
+  </div>
+  <div class="tquote gd" style="margin-top:2rem"><p>"Rien ne passe en production sans que les deux aient validé. C’est cette rigueur à chaque étape qui garantit l’intégrité de nos modèles."</p></div>
+  <div class="disc" style="margin-top:2rem"><div class="disc-i"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><p class="disc-t">Le trading implique un risque total ou partiel des pertes. Les performances passées ne garantissent pas les résultats futurs.</p></div>
+</div></div></div><div id="page-tarifs" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="ctr rv" style="margin-bottom:3rem"><div class="stag" style="justify-content:center"><span class="stagd"></span>Accès aux algorithmes</div><h1>Choisissez votre <em>formule</em></h1><p class="sub" style="margin:0 auto;text-align:center">Nos algorithmes s’intègrent directement dans MetaTrader 4/5. Aucune expérience de programmation requise.</p></div>
+  <div class="ppg rv">
+    <div class="ppc pb"><div class="pptag em"></div><div class="ppn">Starter</div><div class="ppa" style="color:rgba(255,255,255,.45)">1 algorithme</div><div class="ppd">Idéal pour démarrer et tester une première stratégie algorithmique.</div><div class="ppv" style="color:#fff">89<span style="font-size:1.2rem;font-weight:400;color:rgba(255,255,255,.5)">€</span></div><div class="ppp">par mois</div></div>
+    <div class="ppc pb"><div class="pptag em"></div><div class="ppn">Duo</div><div class="ppa" style="color:rgba(255,255,255,.45)">2 algorithmes</div><div class="ppd">Première diversification avec deux stratégies complémentaires.</div><div class="ppv" style="color:#fff">159<span style="font-size:1.2rem;font-weight:400;color:rgba(255,255,255,.5)">€</span></div><div class="ppp">par mois</div></div>
+    <div class="ppc pr"><div class="ptl" style="background:linear-gradient(90deg,transparent,#00d4aa,transparent)"></div><div class="pptag rc">Recommandé</div><div class="ppn">Trio</div><div class="ppa" style="color:var(--teal)">3 algorithmes</div><div class="ppd">La formule idéale pour couvrir plusieurs régimes de marché efficacement.</div><div class="ppv" style="color:var(--teal)">199<span style="font-size:1.2rem;font-weight:400;color:rgba(0,212,170,.6)">€</span></div><div class="ppp">par mois</div></div>
+    <div class="ppc pg"><div class="ptl" style="background:linear-gradient(90deg,transparent,#f59e0b,transparent)"></div><div class="pptag gp">Diversification max</div><div class="ppn">Multi</div><div class="ppa" style="color:var(--amber)">4 algorithmes +</div><div class="ppd">Pour les traders qui veulent couvrir l’ensemble des conditions de marché.</div><div class="ppv" style="color:var(--amber)">299<span style="font-size:1.2rem;font-weight:400;color:rgba(245,158,11,.6)">€</span></div><div class="ppp">par mois</div></div>
+  </div>
+    <div style="text-align:center;margin-bottom:2rem">
+    <div onclick="go('algos')" style="display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:.6rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)" onmouseover="this.style.background='rgba(255,255,255,.1)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.color='rgba(255,255,255,.7)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+      Voir les modèles
+    </div>
+  </div>
+  <div class="strip gd rv"><div class="si-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Accès immédiat</div><div class="si-sep"></div><div class="si-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Annulable à tout moment</div><div class="si-sep"></div><div class="si-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Maintenance incluse</div><div class="si-sep"></div><div class="si-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Paiement sécurisé</div></div>
+  <div class="sec"><div class="rv"><div class="stag"><span class="stagd"></span>Inclus dans chaque formule</div></div>
+  <div class="ig rv">
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="it2">Algorithme complet</div><div class="id2">Fichier .ex5 prêt à l’installation sur MetaTrader 4/5, avec paramètres de risque configurables.</div></div></div>
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="it2">Statistiques en temps réel</div><div class="id2">Dashboard complet : rendement cumulé, drawdown, win rate, Sharpe ratio, journal des trades.</div></div></div>
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div><div class="it2">Maintenance incluse</div><div class="id2">Mises à jour régulières, optimisations et corrections sans frais supplémentaires.</div></div></div>
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="it2">Documentation complète</div><div class="id2">Logique, paramètres, conditions de marché ciblées et risques associés expliqués en détail.</div></div></div>
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="it2">Support dédié</div><div class="id2">Notre équipe répond sous 24 heures à toutes vos questions de configuration.</div></div></div>
+    <div class="ic2 gd"><div class="ii"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><div><div class="it2">Journal des trades</div><div class="id2">Accès complet à l’historique de chaque trade exécuté, en toute transparence.</div></div></div>
+  </div></div>
+  <div class="sec"><div class="rv"><div class="stag"><span class="stagd"></span>Pour commencer</div><h2>Ce dont vous avez <em>besoin</em></h2><p class="sub">Pas besoin d’être développeur. Trois éléments suffisent.</p></div>
+  <div class="bg2">
+    <div class="bc gd rv"><div class="bnum">01. Requis</div><div class="btt">MetaTrader 5</div><div class="bd">Logiciel gratuit sur Windows, Mac, iOS et Android. Téléchargeable depuis le site de votre broker ou sur metaquotes.net. MT5 est recommandé, la version la plus à jour.</div></div>
+    <div class="bc gd rv d1"><div class="bnum">02. Requis</div><div class="btt">Un broker compatible</div><div class="bd">Tout broker proposant MetaTrader 5 fonctionne. Compte personnel, prop firm, démo. Peu importe. Vérifiez que les instruments sont disponibles. Aucune affiliation chez GreyAnchor.</div></div>
+    <div class="bc gd rv d2"><div class="bopt">Optionnel</div><div class="bnum" style="color:var(--amber)">03. Recommandé</div><div class="btt">Un VPS</div><div class="bd">Si vous souhaitez que l’algorithme tourne 24h/24 sans laisser votre ordinateur allumé. Environ 10–15€/mois. Sans VPS, l’algo fonctionne uniquement quand MT5 est ouvert.</div></div>
+  </div>
+  <div class="gnote gt rv"><div class="gnote-i"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><div class="gnote-t">Nous vous guidons dans la configuration complète avec une <strong style="color:rgba(255,255,255,.7)">vidéo pas à pas</strong> et un support dédié inclus dans chaque formule. La plupart de nos clients ont leur algorithme actif le jour même.</div></div></div>
+  <div class="sec"><div class="rv"><div class="stag"><span class="stagd"></span>Diversification</div><h2>Pourquoi utiliser <em>plusieurs algorithmes</em> ?</h2></div>
+  <div class="dc gd rv">
+    <p class="dt">Chaque algorithme a une logique propre, des marchés différents, et des conditions favorables qui lui sont spécifiques. Un algorithme de suivi de tendance peut traverser une période difficile si le marché évolue en range. Pendant ce temps, un algorithme de retour à la moyenne peut compenser. En combinant plusieurs stratégies décorrélées, vous lissez votre courbe d’équité et réduisez l’impact des périodes de drawdown inévitables.</p>
+    <div class="cv">
+      <div class="clabel">Exemple de complémentarité, performances mensuelles illustratives</div>
+      <div class="crow"><div class="cname" style="color:var(--teal)">ANCHOR-ALPHA</div><div class="ccells"><div class="cell p">+3.8</div><div class="cell p">+4.9</div><div class="cell p">+4.6</div><div class="cell n">-1.8</div><div class="cell p">+6.3</div><div class="cell p">+5.7</div><div class="cell n">-1.7</div><div class="cell p">+6.9</div><div class="cell p">+4.1</div><div class="cell n">-1.4</div><div class="cell p">+4.8</div><div class="cell p">+2.2</div></div></div>
+      <div class="crow"><div class="cname" style="color:var(--blue)">ANCHOR-DELTA</div><div class="ccells"><div class="cell n">-1.1</div><div class="cell p">+3.8</div><div class="cell p">+2.4</div><div class="cell p">+5.2</div><div class="cell n">-2.1</div><div class="cell p">+1.9</div><div class="cell p">+4.5</div><div class="cell n">-1.3</div><div class="cell p">+3.8</div><div class="cell p">+5.1</div><div class="cell n">-1.6</div><div class="cell p">+4.3</div></div></div>
+      <div class="cc2"><div class="cc2l">Résultat combiné, courbe lissée</div><div class="cc2r"><div class="cce" style="background:rgba(0,212,170,.12)"></div><div class="cce" style="background:rgba(0,212,170,.22)"></div><div class="cce" style="background:rgba(0,212,170,.18)"></div><div class="cce" style="background:rgba(0,212,170,.18)"></div><div class="cce" style="background:rgba(0,212,170,.15)"></div><div class="cce" style="background:rgba(0,212,170,.2)"></div><div class="cce" style="background:rgba(0,212,170,.16)"></div><div class="cce" style="background:rgba(0,212,170,.22)"></div><div class="cce" style="background:rgba(0,212,170,.2)"></div><div class="cce" style="background:rgba(0,212,170,.18)"></div><div class="cce" style="background:rgba(0,212,170,.14)"></div><div class="cce" style="background:rgba(0,212,170,.2)"></div></div><div class="cnote">Données illustratives : quand l’un recule, l’autre compense. La courbe combinée est plus stable.</div></div>
+    </div>
+    <div class="dp"><div class="dpi"><span class="dpd"></span><span class="dpt"><strong style="color:rgba(255,255,255,.7)">Stratégies décorrélées</strong> : quand l’une est en rouge, l’autre peut compenser</span></div><div class="dpi"><span class="dpd"></span><span class="dpt"><strong style="color:rgba(255,255,255,.7)">Marchés différents</strong> : Dow Jones, Nasdaq, S&amp;P. Pas les mêmes cycles</span></div><div class="dpi"><span class="dpd"></span><span class="dpt"><strong style="color:rgba(255,255,255,.7)">Styles différents</strong> : scalping, swing, retour à la moyenne. Répartition du risque global</span></div><div class="dpi"><span class="dpd"></span><span class="dpt"><strong style="color:rgba(255,255,255,.7)">Statistiques plus robustes</strong> : plus de trades = résultats plus fiables sur la durée</span></div></div>
+  </div></div>
+  <div class="disc rv"><div class="disc-i"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><p class="disc-t">Le trading implique un risque total ou partiel des pertes. Les performances passées ne garantissent pas les résultats futurs. Ne tradez jamais avec des fonds que vous ne pouvez pas vous permettre de perdre.</p></div>
+</div>
+</div>
+</div><div id="page-faq" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="ctr rv" style="margin-bottom:3rem">
+    <div class="stag" style="justify-content:center"><span class="stagd"></span>Support</div>
+    <h1>Questions <em>fréquentes</em></h1>
+    <p class="sub" style="margin:0 auto;text-align:center">Toutes les réponses aux questions que vous vous posez, classées par thème.</p>
+  </div>
+  <div style="max-width:760px;margin:0 auto">
+    <div class="fcat rv">
+      <div class="fcat-title"><div class="fcat-bar" style="background:var(--teal)"></div><span style="color:var(--teal)">Prise en main</span></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">C’est facile à utiliser ?<span class="fchev">▾</span></button><div class="fans">Oui. Une fois votre abonnement activé, vous recevez le fichier de l’algorithme et un guide d’installation pas à pas. Il vous suffit de l’installer sur MetaTrader 4 ou 5, de le glisser sur le graphique correspondant, et de l’activer. Pas besoin de connaissances en programmation.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">C’est rapide à mettre en place ?<span class="fchev">▾</span></button><div class="fans">Comptez environ 10 à 15 minutes pour la première installation. Le guide fourni est simple et illustré. La plupart de nos utilisateurs ont leur algorithme en fonctionnement le jour même de leur abonnement.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Je peux faire tourner le robot 24h/24 ?<span class="fchev">▾</span></button><div class="fans">Oui. L’algorithme fonctionne en autonomie totale une fois activé sur MetaTrader. Pour qu’il tourne en continu sans interruption, il est recommandé d’utiliser un VPS. Sans VPS, l’algorithme ne fonctionne que lorsque votre ordinateur est allumé et MetaTrader ouvert.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Suis-je libre d’arrêter l’algorithme quand je veux ?<span class="fchev">▾</span></button><div class="fans">Oui, vous avez 100% du contrôle. Vous pouvez démarrer, mettre en pause ou stopper définitivement l’algorithme à tout moment depuis MetaTrader. Aucune contrainte technique ne vous en empêche.</div></div>
+    </div>
+    <div class="fcat rv">
+      <div class="fcat-title"><div class="fcat-bar" style="background:var(--blue)"></div><span style="color:var(--blue)">Utilisation &amp; Paramètres</span></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Puis-je modifier les paramètres des algorithmes ?<span class="fchev">▾</span></button><div class="fans">Oui, vous êtes entièrement maître de la configuration. Vous pouvez ajuster les paramètres selon votre capital et votre tolérance au risque. Les performances affichées sur le site correspondent aux paramètres de référence. Toute modification peut impacter les résultats.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Puis-je utiliser plusieurs algorithmes en même temps ?<span class="fchev">▾</span></button><div class="fans">Oui, et c’est même recommandé. Combiner plusieurs algorithmes sur différents marchés permet de diversifier l’exposition et de lisser la performance globale. Veillez simplement à adapter le risque par algorithme pour ne pas sur-exposer votre compte.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Puis-je utiliser un algorithme sur un compte prop firm ?<span class="fchev">▾</span></button><div class="fans">Oui, absolument. Nos algorithmes sont compatibles avec les comptes prop firm. Veillez à bien vérifier les règles spécifiques de votre prop firm (drawdown max autorisé, horaires de trading, instruments autorisés) et à adapter les paramètres de risque en conséquence.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Puis-je utiliser un algorithme pendant un challenge ?<span class="fchev">▾</span></button><div class="fans">Oui, nos algorithmes peuvent être utilisés pendant les phases de challenge. Restez attentif aux règles de votre prop firm, notamment les limites de drawdown journalier et global, et configurez les paramètres de risque de manière conservative pour maximiser vos chances de passage.</div></div>
+    </div>
+    <div class="fcat rv">
+      <div class="fcat-title"><div class="fcat-bar" style="background:var(--purple)"></div><span style="color:var(--purple)">Performances &amp; Données</span></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Les performances affichées sont-elles en temps réel ?<span class="fchev">▾</span></button><div class="fans">Oui. Les données que vous voyez sur le site sont actualisées toutes les 2 minutes et reflètent l’exécution réelle des algorithmes.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Les performances passées garantissent-elles les résultats futurs ?<span class="fchev">▾</span></button><div class="fans">Non. Les performances affichées sont basées sur l’historique réel des algorithmes, mais elles ne constituent pas une garantie de résultats futurs. Le trading implique des risques, et les conditions de marché peuvent évoluer.</div></div>
+    </div>
+    <div class="fcat rv">
+      <div class="fcat-title"><div class="fcat-bar" style="background:var(--amber)"></div><span style="color:var(--amber)">Abonnement</span></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Puis-je résilier mon abonnement ?<span class="fchev">▾</span></button><div class="fans">Oui, vous pouvez résilier à tout moment depuis votre espace personnel. L’accès reste actif jusqu’à la fin de la période en cours. Le mois en cours ne sera pas remboursé.</div></div>
+      <div class="fitem"><button class="fq" onclick="tf(this)">Les algos sont-ils exposés aux gaps du week-end ?<span class="fchev">▾</span></button><div class="fans">Non. Tous nos algorithmes sont conçus pour ne plus avoir aucune position ouverte après 21h30. Cette règle élimine tout risque lié aux gaps overnight et over-weekend, notamment le gap d’ouverture du lundi matin.</div></div>
+    </div>
+    <div class="gt rv" style="border-radius:1.25rem;padding:2rem;text-align:center;margin-top:1rem">
+      <p style="font-size:.95rem;font-weight:500;color:#fff;margin-bottom:.5rem">Vous avez une autre question ?</p>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:1rem">Contactez-nous directement, nous répondons rapidement.</p>
+      <div onclick="go('contact')" style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border-radius:999px;background:var(--teal);color:var(--bg);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s">Nous contacter →</div>
+    </div>
+  </div>
+</div>
+</div>
+</div><div id="page-contact" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="ctr rv" style="margin-bottom:3rem">
+    <div class="stag" style="justify-content:center"><span class="stagd"></span>Contact</div>
+    <h1>Contactez-<em>nous</em></h1>
+    <p class="sub" style="margin:0 auto;text-align:center">Une question ? Besoin d’aide ? Notre équipe vous répond rapidement.</p>
+  </div>
+  <div class="cform gd rv">
+    <div id="csent" class="csent"><p style="font-size:2rem;margin-bottom:1rem">✓</p><p style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.5rem">Message envoyé !</p><p style="font-size:.85rem;color:rgba(255,255,255,.5)">Nous vous répondrons dans les plus brefs délais.</p></div>
+    <div id="cforminner">
+    <div class="crow2">
+      <div><label>Nom</label><input type="text" placeholder="Votre nom"></div>
+      <div><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+    </div>
+    <label>Sujet</label><input type="text" placeholder="Objet de votre demande">
+    <label>Message</label><textarea placeholder="Décrivez votre question ou demande..."></textarea>
+    <button class="csubmit" onclick="sendForm()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Envoyer le message</button>
+    </div>
+    <div style="margin-top:1.5rem;display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.35);font-size:.8rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      contact@greyanchor.com
+    </div>
+  </div>
+</div>
+</div>
+</div><div id="page-algo-alpha" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-ALPHA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">YM1/US30, Dow Jones · Depuis Jan 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+38.4%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-ALPHA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">67.2%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">2.01</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-7.8%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.84</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">524</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Jan 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-alpha" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-alpha" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-beta" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-BETA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">YM1/US30, Dow Jones · Depuis Mar 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+28.7%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-BETA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">71.3%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">2.24</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-5.6%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">2.02</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">381</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Mar 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-beta" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-beta" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-gamma" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-GAMMA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">YM1/US30, Dow Jones · Depuis Jun 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+21.3%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-GAMMA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">58.4%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">1.58</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-10.2%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.54</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">892</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Jun 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-gamma" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-gamma" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-delta" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-DELTA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">NQ1/NAS100, Nasdaq · Depuis Jan 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+44.6%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-DELTA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">65.8%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">1.92</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-9.1%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.76</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">648</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Jan 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-delta" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-delta" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-epsilon" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-EPSILON</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">NQ1/NAS100, Nasdaq · Depuis Avr 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+31.8%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-EPSILON')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">62.4%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">1.74</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-8.4%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.65</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">445</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Avr 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-epsilon" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-epsilon" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-zeta" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-ZETA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">NQ1/NAS100, Nasdaq · Depuis Aoû 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+19.4%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-ZETA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">69.7%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">2.18</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-6.1%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.92</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">278</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Aoû 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-zeta" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-zeta" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-eta" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-ETA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">ES1/SPX500, S&P 500 · Depuis Fév 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+36.2%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-ETA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">70.1%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">2.09</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-6.8%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.88</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">412</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Fév 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-eta" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-eta" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-theta" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-THETA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">ES1/SPX500, S&P 500 · Depuis Mai 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+27.9%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-THETA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">61.8%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">1.61</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-11.3%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">1.58</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">734</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Mai 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-theta" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-theta" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-algo-iota" class="page">
+<div style="padding-top:7rem;padding-bottom:5rem">
+<div class="si">
+  <div class="algo-back" onclick="go('algos')">&#8592; Retour aux modèles</div>
+  <div class="algo-hero">
+    <div><div style="font-size:1.6rem;font-weight:700;letter-spacing:.04em;color:#fff;margin-bottom:.25rem;font-family:'Courier New',monospace">ANCHOR-IOTA</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:.75rem">ES1/SPX500, S&P 500 · Depuis Sep 2025</div><div style="font-size:3rem;font-weight:700;color:var(--teal);letter-spacing:-.04em;line-height:1">+16.1%</div></div>
+    <button class="algo-add-btn" onclick="addAlgoToCart('ANCHOR-IOTA')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Ajouter au panier</button>
+  </div>
+  <div class="algo-stats-strip"><div class="algo-stat-box"><div class="asb-label">Win Rate</div><div class="asb-val teal">73.2%</div></div><div class="algo-stat-box"><div class="asb-label">Sharpe Ratio</div><div class="asb-val blue">2.44</div></div><div class="algo-stat-box"><div class="asb-label">Drawdown Max</div><div class="asb-val red">-4.9%</div></div><div class="algo-stat-box"><div class="asb-label">Profit Factor</div><div class="asb-val">2.18</div></div><div class="algo-stat-box"><div class="asb-label">Nb Trades</div><div class="asb-val">124</div></div><div class="algo-stat-box"><div class="asb-label">Depuis</div><div class="asb-val" style="font-size:.82rem">Sep 2025</div></div></div>
+  <div class="chart-card"><div class="chart-title">Courbe d’équité <span>Mise à jour en temps réel</span></div><canvas id="eq-iota" style="width:100%;height:160px;display:block" height="160"></canvas></div>
+  <div class="chart-card"><div class="chart-title">Performances annuelles</div><div id="annual-iota" class="annual-bars"></div></div>
+  <div class="chart-card"><div class="chart-title">Trades en cours <span><span style="width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite;display:inline-block;margin-right:.3rem"></span>Live</span></div><table class="trades-table"><thead><tr><th>Ticket</th><th>Type</th><th>Vol.</th><th>Ouvert</th><th>Entrée</th><th>Actuel</th><th>P&amp;L</th></tr></thead><tbody><tr><td>#84201</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>14:18</td><td>42 380</td><td>42 451</td><td style="color:var(--teal)">+$142</td></tr><tr><td>#84187</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>13:55</td><td>42 610</td><td>42 451</td><td style="color:var(--teal)">+$80</td></tr></tbody></table></div>
+  <div class="chart-card"><div class="chart-title">Historique des trades</div><table class="trades-table"><thead><tr><th>Date</th><th>Type</th><th>Vol.</th><th>Entrée</th><th>Sortie</th><th>Durée</th><th>P&amp;L</th></tr></thead><tbody><tr><td>23/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 210</td><td>42 380</td><td>42min</td><td style="color:var(--teal)">+$340</td></tr><tr><td>23/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 450</td><td>42 330</td><td>28min</td><td style="color:var(--teal)">+$120</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>42 180</td><td>42 090</td><td>55min</td><td style="color:var(--red)">-$180</td></tr><tr><td>22/03/26</td><td style="color:var(--teal)">BUY</td><td>1.5</td><td>41 980</td><td>42 210</td><td>1h12</td><td style="color:var(--teal)">+$690</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>1.0</td><td>42 340</td><td>42 180</td><td>38min</td><td style="color:var(--teal)">+$320</td></tr><tr><td>21/03/26</td><td style="color:var(--red)">SELL</td><td>0.5</td><td>42 120</td><td>42 280</td><td>22min</td><td style="color:var(--red)">-$160</td></tr><tr><td>20/03/26</td><td style="color:var(--teal)">BUY</td><td>1.0</td><td>41 850</td><td>42 060</td><td>48min</td><td style="color:var(--teal)">+$420</td></tr></tbody></table></div>
+  <div style="border-radius:1.25rem;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:.85rem;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.18);margin-top:1.5rem"><span style="font-size:1.1rem;flex-shrink:0">⚠</span><p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65">Les algorithmes GreyAnchor sont des outils complémentaires à votre trading personnel. Ils ne se substituent pas à une stratégie propre, une gestion du risque rigoureuse ou une connaissance approfondie des marchés. Les résultats passés ne garantissent en aucun cas les performances futures. Toute décision de trading reste de votre entière responsabilité.</p></div>
+</div></div></div>
+<div id="page-dashboard" class="page">
+<div style="padding-top:5rem;min-height:100vh">
+  <!-- HEADER -->
+  <div style="background:linear-gradient(135deg,rgba(0,212,170,.06) 0%,transparent 60%);border-bottom:1px solid rgba(255,255,255,.06);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <div><div style="font-size:1.1rem;font-weight:600;color:#fff">Dashboard</div><div style="font-size:.75rem;color:rgba(255,255,255,.4)">Tableau de bord de vos algorithmes actifs</div></div>
+    <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--teal)"><div style="width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite"></div>Données en temps réel</div>
+  </div>
+
+  <!-- TABS -->
+  <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);padding:0 2rem">
+    <button onclick="switchTab('perf')" id="tab-perf" style="padding:.85rem 1.25rem;font-size:.82rem;font-weight:500;background:none;border:none;border-bottom:2px solid var(--teal);color:#fff;cursor:pointer;font-family:var(--font);transition:all .2s">Mes Algos</button>
+    <button onclick="switchTab('paiements')" id="tab-paiements" style="padding:.85rem 1.25rem;font-size:.82rem;font-weight:500;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--font);transition:all .2s">Paiements</button>
+    <button onclick="switchTab('parrainage')" id="tab-parrainage" style="padding:.85rem 1.25rem;font-size:.82rem;font-weight:500;background:none;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--font);transition:all .2s">Parrainage</button>
+  </div>
+
+  <!-- NO PLAN -->
+  <div id="dash-empty" style="text-align:center;padding:5rem 2rem;color:rgba(255,255,255,.3)">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="margin-bottom:1.25rem;opacity:.3"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    <p style="font-size:.9rem;margin-bottom:.5rem">Aucun algorithme actif</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.2);margin-bottom:1.5rem">Vous n’avez pas encore souscrit à une formule.</p>
+    <div onclick="go('tarifs')" style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:.6rem;background:var(--teal);color:var(--bg);font-size:.82rem;font-weight:600;cursor:pointer">Voir les formules →</div>
+  </div>
+
+  <!-- TAB: PERFORMANCES -->
+  <div id="tab-content-perf" style="display:none;padding:1.5rem 2rem">
+    <div id="dash-myalgos-list"></div>
+    <div style="margin-top:1.25rem"><div onclick="go('algos')" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--teal);cursor:pointer">Ajouter des algorithmes →</div></div>
+  </div>
+
+  <div id="tab-content-paiements" style="display:none;padding:1.5rem 2rem">
+    <div style="max-width:700px">
+      <div class="gd" style="border-radius:1.25rem;padding:1.5rem;margin-bottom:1.25rem">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1.25rem">Historique des paiements</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+          <thead><tr>
+            <th style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);padding:.4rem .6rem;text-align:left;font-weight:400;border-bottom:1px solid rgba(255,255,255,.06)">Date</th>
+            <th style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);padding:.4rem .6rem;text-align:left;font-weight:400;border-bottom:1px solid rgba(255,255,255,.06)">Description</th>
+            <th style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);padding:.4rem .6rem;text-align:right;font-weight:400;border-bottom:1px solid rgba(255,255,255,.06)">Montant</th>
+            <th style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);padding:.4rem .6rem;text-align:center;font-weight:400;border-bottom:1px solid rgba(255,255,255,.06)">Statut</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:rgba(255,255,255,.55)">24 Mar 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:500">Abonnement Trio, Mars 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:600;text-align:right">199€</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);text-align:center"><span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">✓ Pris en charge</span></td></tr>
+            <tr><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:rgba(255,255,255,.55)">24 Fév 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:500">Abonnement Trio, Février 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:600;text-align:right">199€</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);text-align:center"><span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">✓ Pris en charge</span></td></tr>
+            <tr><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:rgba(255,255,255,.55)">24 Jan 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:500">Abonnement Duo, Janvier 2026</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);color:#fff;font-weight:600;text-align:right">159€</td><td style="padding:.7rem .6rem;border-bottom:1px solid rgba(255,255,255,.03);text-align:center"><span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">✓ Pris en charge</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="gd" style="border-radius:1.25rem;padding:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div><div style="font-size:.8rem;font-weight:600;color:#fff;margin-bottom:.2rem">Prochain prélèvement</div><div style="font-size:.75rem;color:rgba(255,255,255,.45)">24 Avril 2026, Abonnement Trio</div></div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--teal)">199€</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: PARRAINAGE -->
+  <div id="tab-content-parrainage" style="display:none;padding:1.5rem 2rem">
+    <div style="max-width:680px">
+      <div class="gd" style="border-radius:1.5rem;padding:2rem;margin-bottom:1.25rem;border:1px solid rgba(0,212,170,.18);background:rgba(0,212,170,.03)">
+        <div style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap">
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:1rem;font-weight:600;color:#fff;margin-bottom:.5rem">Votre code de parrainage</div>
+            <p style="font-size:.82rem;color:rgba(255,255,255,.48);line-height:1.65;margin-bottom:1.25rem">Partagez votre code avec vos proches. Chaque filleul bénéficie de <strong style="color:var(--teal)">-15% sur son premier mois</strong> et vous recevez <strong style="color:var(--teal)">un mois offert</strong> dès le premier paiement validé.</p>
+            <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+              <div id="referral-code" style="font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.2em;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:.5rem;padding:.6rem 1.1rem">GREY-XXXX</div>
+              <button onclick="copyCode()" style="padding:.6rem 1rem;border-radius:.5rem;background:var(--teal);color:var(--bg);font-size:.78rem;font-weight:600;border:none;cursor:pointer;font-family:var(--font);transition:all .2s" id="copy-btn">Copier</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;flex-shrink:0">
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:.85rem;padding:1rem;text-align:center"><div style="font-size:1.4rem;font-weight:700;color:var(--teal)">3</div><div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.25rem;text-transform:uppercase;letter-spacing:.08em">Filleuls</div></div>
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:.85rem;padding:1rem;text-align:center"><div style="font-size:1.4rem;font-weight:700;color:var(--teal)">1</div><div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.25rem;text-transform:uppercase;letter-spacing:.08em">Mois offert</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gd" style="border-radius:1.25rem;padding:1.5rem;margin-bottom:1.25rem">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1.1rem">Historique des filleuls</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.04)">
+          <div><div style="font-size:.8rem;font-weight:500;color:#fff">Thomas R.</div><div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.1rem">Inscrit le 12 Mar 2026, Formule Starter</div></div>
+          <span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">Actif</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.04)">
+          <div><div style="font-size:.8rem;font-weight:500;color:#fff">Lucas M.</div><div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.1rem">Inscrit le 28 Fév 2026, Formule Duo</div></div>
+          <span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">Actif</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem 0">
+          <div><div style="font-size:.8rem;font-weight:500;color:#fff">Antoine P.</div><div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.1rem">Inscrit le 10 Jan 2026, Formule Starter</div></div>
+          <span style="padding:.2rem .6rem;border-radius:999px;font-size:.65rem;font-weight:600;background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.2)">Actif</span>
+        </div>
+      </div>
+
+      <div class="gd" style="border-radius:1.25rem;padding:1.25rem">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1rem">Comment ça fonctionne</div>
+        <div style="display:flex;flex-direction:column;gap:.75rem">
+          <div style="display:flex;align-items:flex-start;gap:.75rem"><div style="width:24px;height:24px;border-radius:50%;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--teal);flex-shrink:0">1</div><p style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5">Partagez votre code personnel à un ami ou un proche</p></div>
+          <div style="display:flex;align-items:flex-start;gap:.75rem"><div style="width:24px;height:24px;border-radius:50%;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--teal);flex-shrink:0">2</div><p style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5">Il s’inscrit et entre votre code lors de sa souscription, il bénéficie de <strong style="color:var(--teal)">-15%</strong> sur son premier mois</p></div>
+          <div style="display:flex;align-items:flex-start;gap:.75rem"><div style="width:24px;height:24px;border-radius:50%;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--teal);flex-shrink:0">3</div><p style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5">Dès son premier paiement validé, vous recevez automatiquement <strong style="color:var(--teal)">un mois offert</strong> sur votre abonnement</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<footer id="footer" class="active">
+<div class="fi">
+  <div class="ftop">
+    <div><div class="flogo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color:#fff"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg><span class="flt2">Grey<span>Anchor</span></span></div><p class="ftg">Algorithmes de trading systématiques.<br>Transparents. Mesurables.</p></div>
+    <div class="fls">
+      <div class="fcl"><h4>Plateforme</h4><ul><li><a onclick="go('algos')">Algorithmes</a></li><li><a onclick="go('equipe')">Équipe</a></li><li><a onclick="go('tarifs')">Tarifs</a></li><li><a onclick="go('dashboard')">Dashboard</a></li></ul></div>
+      <div class="fcl"><h4>Légal</h4><ul><li><a onclick="go('cgv')">Conditions Générales de Vente</a></li><li><a onclick="go('mentions')">Mentions légales</a></li><li><a onclick="go('contact')">Contact</a></li></ul></div>
+    </div>
+  </div>
+  <div class="fbot"><p>© 2026 GreyAnchor. Tous droits réservés.</p><p>Trading implique des risques. Performances passées ≠ résultats futurs.</p></div>
+</div>
+</footer><script>
+
+var cart=[];
+var algosList=[
+  {id:'ANCHOR-ALPHA',market:'YM1/US30'},{id:'ANCHOR-DELTA',market:'NQ1/NAS100'},
+  {id:'ANCHOR-ETA',market:'ES1/SPX500'},{id:'ANCHOR-BETA',market:'YM1/US30'},
+  {id:'ANCHOR-GAMMA',market:'YM1/US30'},{id:'ANCHOR-EPSILON',market:'NQ1/NAS100'},
+  {id:'ANCHOR-ZETA',market:'NQ1/NAS100'},{id:'ANCHOR-THETA',market:'ES1/SPX500'},
+  {id:'ANCHOR-IOTA',market:'ES1/SPX500'}
+];
+function getPlan(){var n=cart.length;if(n<=0)return{name:'',price:0};if(n===1)return{name:'Starter',price:89};if(n===2)return{name:'Duo',price:159};if(n===3)return{name:'Trio',price:199};return{name:'Multi',price:299};}
+function openCart(){document.getElementById('cart-panel').style.transform='translateX(0)';var ov=document.getElementById('cart-overlay');ov.style.opacity='1';ov.style.pointerEvents='all';}
+function closeCart(){document.getElementById('cart-panel').style.transform='translateX(100%)';var ov=document.getElementById('cart-overlay');ov.style.opacity='0';ov.style.pointerEvents='none';}
+function addToCart(planId){var map={starter:'ANCHOR-ALPHA',duo:'ANCHOR-DELTA',trio:'ANCHOR-ETA',multi:'ANCHOR-BETA'};addAlgoToCart(map[planId]||planId);}
+function addAlgoToCart(algoId){
+  if(cart.find(function(i){return i.id===algoId;})){cart=cart.filter(function(i){return i.id!==algoId;});}
+  else{var info=algosList.find(function(a){return a.id===algoId;})||{id:algoId,market:''};cart.push({id:algoId,market:info.market});}
+  renderCart();openCart();
+}
+function removeFromCart(algoId){cart=cart.filter(function(i){return i.id!==algoId;});renderCart();}
+function renderCart(){
+  var body=document.getElementById('cart-body');
+  var empty=document.getElementById('cart-empty');
+  var summary=document.getElementById('cart-summary');
+  var btn=document.getElementById('cart-btn');
+  var countEl=document.getElementById('cart-count');
+  var badge=document.getElementById('cart-badge');
+  countEl.textContent=cart.length;
+  if(badge){badge.textContent=cart.length;badge.style.display=cart.length>0?'flex':'none';}
+  body.querySelectorAll('.cart-item,.cart-plan-header').forEach(function(el){el.remove();});
+  if(cart.length===0){empty.style.display='block';summary.style.display='none';btn.disabled=true;btn.style.opacity='.4';return;}
+  empty.style.display='none';summary.style.display='block';btn.disabled=false;btn.style.opacity='1';
+  var plan=getPlan();
+  var ph=document.createElement('div');ph.className='cart-plan-header';
+  ph.style.cssText='border-radius:.6rem;padding:.65rem 1rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between';
+  ph.innerHTML='<span style="font-size:.78rem;font-weight:600;color:#fff">Formule '+plan.name+'</span><span style="font-size:.82rem;font-weight:700;color:var(--teal)">'+plan.price+'€/mois</span>';
+  body.appendChild(ph);
+  cart.forEach(function(item){
+    var wrap=document.createElement('div');wrap.className='cart-item';
+    wrap.style.cssText='border-radius:.6rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);margin-bottom:.5rem;display:flex;align-items:center;gap:.75rem';
+    var info=document.createElement('div');info.style.flex='1';
+    var n=document.createElement('div');n.style.cssText='font-size:.8rem;font-weight:600;color:#fff;font-family:"Courier New",monospace';n.textContent=item.id;
+    var m=document.createElement('div');m.style.cssText='font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.1rem';m.textContent=item.market;
+    info.appendChild(n);info.appendChild(m);
+    var rm=document.createElement('div');
+    rm.style.cssText='width:22px;height:22px;border-radius:50%;background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#f43f5e;flex-shrink:0';
+    rm.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    (function(id){rm.addEventListener('click',function(){removeFromCart(id);});})(item.id);
+    wrap.appendChild(info);wrap.appendChild(rm);body.appendChild(wrap);
+  });
+  document.getElementById('cart-subtotal').textContent=plan.price+'€';
+  document.getElementById('cart-total').textContent=plan.price+'€';
+}
+
+function switchTab(name){
+  var tabs=['perf','paiements','parrainage'];
+  tabs.forEach(function(t){
+    var btn=document.getElementById('tab-'+t);
+    var content=document.getElementById('tab-content-'+t);
+    if(btn){btn.style.borderBottomColor=t===name?'var(--teal)':'transparent';btn.style.color=t===name?'#fff':'rgba(255,255,255,.45)';}
+    if(content){content.style.display=t===name?'block':'none';}
+  });
+}
+function copyCode(){
+  var code=document.getElementById('referral-code').textContent;
+  navigator.clipboard.writeText(code).then(function(){
+    var btn=document.getElementById('copy-btn');
+    btn.textContent='Copié !';
+    btn.style.background='rgba(0,212,170,.2)';
+    btn.style.color='var(--teal)';
+    setTimeout(function(){btn.textContent='Copier';btn.style.background='var(--teal)';btn.style.color='var(--bg)';},2000);
+  });
+}
+
+function renderDashboard(){
+  var empty=document.getElementById('dash-empty');
+  if(!empty)return;
+  switchTab('perf');
+  if(cart.length===0){
+    empty.style.display='block';
+    ['perf','abonnements','paiements','parrainage'].forEach(function(t){var el=document.getElementById('tab-content-'+t);if(el)el.style.display='none';});
+    return;
+  }
+  empty.style.display='none';
+  switchTab('perf');
+  var plan=getPlan();
+  var myAlgosEl=document.getElementById('dash-myalgos-list');
+  if(myAlgosEl){
+    var ad={'ANCHOR-ALPHA':{ret:'+38.4%',wr:'67.2%',sh:'2.01',dd:'-7.8%',mkt:'YM1/US30',si:'Jan 2025',wk:'+1.2%',mo:'+8.4%',id:'alpha'},'ANCHOR-DELTA':{ret:'+44.6%',wr:'65.8%',sh:'1.92',dd:'-9.1%',mkt:'NQ1/NAS100',si:'Jan 2025',wk:'+2.1%',mo:'+11.2%',id:'delta'},'ANCHOR-ETA':{ret:'+36.2%',wr:'70.1%',sh:'2.09',dd:'-6.8%',mkt:'ES1/SPX500',si:'Fév 2025',wk:'+0.9%',mo:'+7.1%',id:'eta'},'ANCHOR-BETA':{ret:'+28.7%',wr:'71.3%',sh:'2.24',dd:'-5.6%',mkt:'YM1/US30',si:'Mar 2025',wk:'+0.9%',mo:'+2.2%',id:'beta'},'ANCHOR-GAMMA':{ret:'+21.3%',wr:'58.4%',sh:'1.58',dd:'-10.2%',mkt:'YM1/US30',si:'Jun 2025',wk:'+1.2%',mo:'+1.9%',id:'gamma'},'ANCHOR-EPSILON':{ret:'+31.8%',wr:'62.4%',sh:'1.74',dd:'-8.4%',mkt:'NQ1/NAS100',si:'Avr 2025',wk:'+1.1%',mo:'+2.9%',id:'epsilon'},'ANCHOR-ZETA':{ret:'+19.4%',wr:'69.7%',sh:'2.18',dd:'-6.1%',mkt:'NQ1/NAS100',si:'Aoû 2025',wk:'-0.3%',mo:'+1.6%',id:'zeta'},'ANCHOR-THETA':{ret:'+27.9%',wr:'61.8%',sh:'1.61',dd:'-11.3%',mkt:'ES1/SPX500',si:'Mai 2025',wk:'+0.5%',mo:'+2.1%',id:'theta'},'ANCHOR-IOTA':{ret:'+16.1%',wr:'73.2%',sh:'2.44',dd:'-4.9%',mkt:'ES1/SPX500',si:'Sep 2025',wk:'-0.7%',mo:'+1.3%',id:'iota'}};
+    myAlgosEl.innerHTML='';
+    cart.forEach(function(item){
+      var d=ad[item.id]||{ret:'+0%',wr:'-',sh:'-',dd:'-',mkt:item.market,si:'-',wk:'-',mo:'-',id:'alpha'};
+      var wpos=d.wk.indexOf('-')<0;
+      var div=document.createElement('div');
+      div.className='gd';
+      div.style.cssText='border-radius:1.25rem;padding:1.5rem;margin-bottom:1rem;cursor:pointer';
+      div.onclick=function(){go('algo-'+d.id);};
+      div.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.1rem">'
+        +'<div><div style="font-size:.95rem;font-weight:700;color:#fff;font-family:Courier New,monospace;letter-spacing:.04em">'+item.id+'</div>'
+        +'<div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.2rem">'+d.mkt+' · Depuis '+d.si+'</div></div>'
+        +'<div style="text-align:right"><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em">'+d.ret+'</div>'
+        +'<div style="font-size:.68rem;color:'+(wpos?'var(--teal)':'var(--red)')+';margin-top:.2rem">Semaine : '+d.wk+'</div></div></div>'
+        +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.9rem">'
+        +'<div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.2rem">Win Rate</div><div style="font-size:.88rem;font-weight:600;color:var(--teal)">'+d.wr+'</div></div>'
+        +'<div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.2rem">Sharpe</div><div style="font-size:.88rem;font-weight:600;color:var(--blue)">'+d.sh+'</div></div>'
+        +'<div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.2rem">DD Max</div><div style="font-size:.88rem;font-weight:600;color:var(--red)">'+d.dd+'</div></div>'
+        +'<div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.2rem">Ce mois</div><div style="font-size:.88rem;font-weight:600;color:var(--teal)">'+d.mo+'</div></div>'
+        +'</div>';
+      myAlgosEl.appendChild(div);
+    });
+  }
+  var aboEl=document.getElementById('dash-abo-content');
+  if(aboEl && plan.name){
+    aboEl.innerHTML='<div class="gd" style="border-radius:1.25rem;padding:1.5rem;margin-bottom:1.25rem;border:1px solid rgba(0,212,170,.15)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">'
+      +'<div><div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:.5rem">Abonnement actif</div>'
+      +'<div style="font-size:1.1rem;font-weight:600;color:#fff">Formule '+plan.name+'</div>'
+      +'<div style="font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.25rem">'+cart.length+' algorithme'+(cart.length>1?'s':'')+' actif'+(cart.length>1?'s':'')+' · Renouvellement mensuel</div></div>'
+      +'<div style="text-align:right"><div style="font-size:1.6rem;font-weight:700;color:var(--teal)">'+plan.price+'€<span style="font-size:.85rem;font-weight:400;color:rgba(255,255,255,.4)">/mois</span></div>'
+      +'<div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.25rem">Prochain prl. le 24 Avr 2026</div></div></div>'
+      +'<div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)">'
+      +'<div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.08em">Algorithmes inclus</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:.5rem">'
+      +cart.map(function(a){return '<span style="padding:.3rem .75rem;border-radius:.4rem;font-size:.72rem;font-weight:600;color:var(--teal);background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.18);font-family:Courier New,monospace">'+a.id+'</span>';}).join('')
+      +'</div></div>'
+      +'<div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:.75rem;flex-wrap:wrap">'
+      +'<div onclick="go("tarifs")" style="padding:.55rem 1rem;border-radius:.5rem;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);color:var(--teal);font-size:.78rem;font-weight:500;cursor:pointer">Changer de formule</div>'
+      +'<div style="padding:.55rem 1rem;border-radius:.5rem;background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.15);color:var(--red);font-size:.78rem;font-weight:500;cursor:pointer">Résilier</div>'
+      +'</div></div>';
+  }
+  var algos=algosByPlan[cart[0].id]||[];
+  var list=document.getElementById('dash-algo-list');
+  var count=document.getElementById('dash-algo-count');
+  if(count)count.textContent=algos.length+' actif'+(algos.length>1?'s':'');
+  if(list){list.innerHTML='';algos.forEach(function(name){var r=document.createElement('div');r.style.cssText='display:flex;align-items:center;gap:.65rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)';r.innerHTML='<div style="width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0"></div><div style="font-size:.78rem;font-weight:600;color:#fff;flex:1;font-family:Courier New,monospace">'+name+'</div><div style="font-size:.62rem;color:var(--teal)">● Actif</div>';list.appendChild(r);});}
+}
+var aeSeeds={alpha:[0,2.1,4.8,3.9,6.2,8.1,7.4,10.2,12.8,11.3,14.1,16.5,15.2,18.4,20.1,19.3,22.6,24.8,23.5,26.2,28.9,27.4,30.1,32.8,31.9,34.2,36.5,35.8,37.9,38.4],beta:[0,1.2,2.8,2.1,4.3,5.9,5.1,7.2,9.1,8.4,10.6,12.1,11.5,13.8,15.2,14.6,16.9,18.4,17.8,20.1,21.9,21.2,23.5,25.1,24.4,26.2,27.8,27.1,28.5,28.7],gamma:[0,0.8,2.1,1.4,3.2,4.8,3.9,5.6,7.2,6.5,8.1,9.8,8.9,10.6,12.1,11.2,13.4,14.8,13.9,15.6,17.1,16.4,18.2,19.5,18.8,20.1,21.3,20.6,21.0,21.3],delta:[0,2.8,5.9,4.8,7.2,9.8,8.4,11.6,14.2,12.8,15.4,18.1,16.8,19.4,22.1,20.8,23.4,26.1,24.8,27.4,30.1,28.8,31.5,34.2,32.8,35.5,38.1,36.8,41.2,44.6],epsilon:[0,1.8,3.9,3.1,5.4,7.2,6.4,8.8,11.2,10.1,12.6,14.8,13.9,16.2,18.1,17.2,19.6,21.8,20.9,23.2,25.4,24.5,26.8,28.9,28.1,30.2,31.8,30.9,31.5,31.8],zeta:[0,0.9,1.8,1.4,2.8,4.1,3.5,5.2,6.8,6.1,7.8,9.2,8.5,10.1,11.8,11.1,12.8,14.2,13.5,15.1,16.8,16.1,17.5,18.9,18.2,19.2,19.4,18.8,19.1,19.4],eta:[0,1.9,4.2,3.4,5.8,7.6,6.8,9.2,11.8,10.6,13.2,15.4,14.2,17.1,19.4,18.2,21.1,23.4,22.2,24.8,27.1,25.8,28.4,30.8,29.6,32.1,34.2,33.1,35.6,36.2],theta:[0,1.4,3.1,2.4,4.2,5.8,5.1,7.1,9.2,8.2,10.4,12.1,11.2,13.4,15.1,14.2,16.4,18.1,17.2,19.2,21.1,20.2,22.4,24.1,23.2,25.1,26.8,25.9,27.6,27.9],iota:[0,0.6,1.4,1.0,2.1,3.2,2.7,4.1,5.6,4.9,6.2,7.8,7.1,8.8,10.1,9.4,11.1,12.4,11.8,13.1,14.2,13.6,14.8,15.6,15.1,15.8,16.1,15.5,15.9,16.1]};
+var aeAnnual={alpha:{2025:38.4},beta:{2025:28.7},gamma:{2025:21.3},delta:{2025:44.6},epsilon:{2025:31.8},zeta:{2025:19.4},eta:{2025:36.2},theta:{2025:27.9},iota:{2025:16.1}};
+function drawAlgoEquity(id){var canvas=document.getElementById('eq-'+id);if(!canvas)return;var pts=aeSeeds[id];if(!pts)return;var W=canvas.offsetWidth||700,H=160;canvas.width=W;canvas.height=H;var ctx=canvas.getContext('2d');ctx.clearRect(0,0,W,H);var max=Math.max.apply(null,pts)+2,min=Math.min.apply(null,pts)-1,rng=max-min||1;function pX(i){return(i/(pts.length-1))*W;}function pY(v){return H-8-((v-min)/rng)*(H-16);}var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(0,212,170,.2)');g.addColorStop(1,'rgba(0,212,170,0)');ctx.beginPath();ctx.moveTo(pX(0),pY(pts[0]));for(var i=1;i<pts.length;i++)ctx.lineTo(pX(i),pY(pts[i]));ctx.lineTo(pX(pts.length-1),H);ctx.lineTo(0,H);ctx.closePath();ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.moveTo(pX(0),pY(pts[0]));for(var i=1;i<pts.length;i++)ctx.lineTo(pX(i),pY(pts[i]));ctx.strokeStyle='#00d4aa';ctx.lineWidth=2;ctx.stroke();}
+function drawAlgoAnnual(id){var el=document.getElementById('annual-'+id);if(!el)return;var data=aeAnnual[id]||{};var years=Object.keys(data);var max=Math.max.apply(null,years.map(function(y){return data[y];}));el.innerHTML='';years.forEach(function(y){var v=data[y],h=Math.max(8,(v/max)*90),col=v>=0?'var(--teal)':'var(--red)';el.innerHTML+='<div style="display:flex;flex-direction:column;align-items:center;flex:1;gap:.35rem"><div style="width:100%;border-radius:4px 4px 0 0;height:'+h+'px;background:'+col+'"></div><div style="font-size:.6rem;color:rgba(255,255,255,.3)">'+y+'</div><div style="font-size:.62rem;font-weight:700;color:'+col+'">'+(v>0?'+':'')+v+'%</div></div>';});}
+function initAlgoPage(id){setTimeout(function(){drawAlgoEquity(id);drawAlgoAnnual(id);},120);}
+
+// ROUTER
+function go(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+page);
+  if(el){el.classList.add('active');}
+  document.querySelectorAll('.nl a').forEach(a=>{
+    a.classList.remove('active');
+    if(a.id==='nl-'+page)a.classList.add('active');
+  });
+  window.scrollTo(0,0);
+  // Re-trigger reveals
+  setTimeout(()=>{
+    document.querySelectorAll('.page.active .rv').forEach(el=>{
+      if(!el.classList.contains('vis')){obs.observe(el);}
+    });
+  },50);
+}
+// FAQ accordion
+function tf(btn){
+  const item=btn.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.fitem.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+// Contact form
+function sendForm(){
+  document.getElementById('cforminner').style.display='none';
+  document.getElementById('csent').classList.add('show');
+}
+// Mobile menu
+function tmm(){const m=document.getElementById('mm');m.style.display=m.style.display==='flex'?'none':'flex';}
+// Scroll nav
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',window.scrollY>30));
+// Lang
+let lang=(navigator.language||'fr').startsWith('fr')?'fr':'en';
+// Reveal observer
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+// CANVAS
+(function(){
+  const cv=document.getElementById('bgc'),ctx=cv.getContext('2d');
+  let W,H,sx=0,cs=[],ep=[],pr=42000,raf;
+  const CW=10,GAP=6,ST=CW+GAP;
+  function gc(){const o=pr,c=o+(Math.random()-.48)*3;pr=c;return{o,c,h:Math.max(o,c)+Math.random()*2,l:Math.min(o,c)-Math.random()*2};}
+  function init(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;cs=[];ep=[];pr=42000;sx=0;const n=Math.ceil(W/ST)+100;for(let i=0;i<n;i++){cs.push(gc());ep.push({x:i*ST,y:100+i*.1+Math.sin(i*.25)*4});}}
+  function draw(){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#060a14';ctx.fillRect(0,0,W,H);
+    const cT=H*.05,cB=H*.55,cH=cB-cT;
+    const vs=Math.floor(sx/ST),ve=vs+Math.ceil(W/ST)+2;
+    const vis=cs.slice(vs,Math.min(ve,cs.length));
+    if(!vis.length)return;
+    const ap=vis.flatMap(c=>[c.h,c.l]);
+    const minP=Math.min(...ap)-4,maxP=Math.max(...ap)+4,rng=maxP-minP||1;
+    const pY=p=>cT+(1-(p-minP)/rng)*cH;
+    ctx.strokeStyle='rgba(255,255,255,.018)';ctx.lineWidth=.5;
+    for(let i=0;i<=6;i++){const y=cT+(i/6)*cH;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    vis.forEach((c,idx)=>{
+      const i=vs+idx,x=i*ST-sx;
+      const a=Math.min(1,(x+30)/30)*Math.min(1,(W-x)/80);
+      if(a<=0)return;
+      const g=c.c>=c.o,xC=x+CW/2;
+      ctx.strokeStyle=g?'rgba(0,212,170,'+a*.7+')':'rgba(244,63,94,'+a*.6+')';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(xC,pY(c.h));ctx.lineTo(xC,pY(c.l));ctx.stroke();
+      const bT=pY(Math.max(c.o,c.c)),bB=pY(Math.min(c.o,c.c)),bH=Math.max(1.5,bB-bT);
+      ctx.fillStyle=g?'rgba(0,212,170,'+a*.65+')':'rgba(244,63,94,'+a*.5+')';ctx.fillRect(x,bT,CW,bH);
+    });
+    if(ep.length>1){
+      const eMin=Math.min(...ep.map(p=>p.y))-1,eMax=Math.max(...ep.map(p=>p.y))+1,eR=eMax-eMin||1;
+      const eY=v=>cT+5+(1-(v-eMin)/eR)*(cH*.6);
+      ctx.beginPath();let st=false;
+      ep.forEach(p=>{const x=p.x-sx;if(x<-20||x>W+20)return;if(!st){ctx.moveTo(x,eY(p.y));st=true;}else ctx.lineTo(x,eY(p.y));});
+      const g2=ctx.createLinearGradient(0,0,W,0);
+      g2.addColorStop(0,'rgba(0,212,170,0)');g2.addColorStop(.3,'rgba(0,212,170,.35)');g2.addColorStop(.7,'rgba(0,212,170,.28)');g2.addColorStop(1,'rgba(0,212,170,0)');
+      ctx.strokeStyle=g2;ctx.lineWidth=1.5;ctx.stroke();
+    }
+    const fL=ctx.createLinearGradient(0,0,100,0);fL.addColorStop(0,'#060a14');fL.addColorStop(1,'transparent');ctx.fillStyle=fL;ctx.fillRect(0,0,100,H);
+    const fR=ctx.createLinearGradient(W-100,0,W,0);fR.addColorStop(0,'transparent');fR.addColorStop(1,'#060a14');ctx.fillStyle=fR;ctx.fillRect(W-100,0,100,H);
+    const fB=ctx.createLinearGradient(0,cB-60,0,H);fB.addColorStop(0,'transparent');fB.addColorStop(1,'#060a14');ctx.fillStyle=fB;ctx.fillRect(0,cB-60,W,H);
+    const fT=ctx.createLinearGradient(0,0,0,cT+30);fT.addColorStop(0,'#060a14');fT.addColorStop(1,'transparent');ctx.fillStyle=fT;ctx.fillRect(0,0,W,cT+30);
+  }
+  function animate(){sx+=.3;const need=Math.ceil((sx+W)/ST)+5;while(cs.length<need){cs.push(gc());const l=ep[ep.length-1];ep.push({x:l.x+ST,y:l.y+(Math.random()-.47)*.7});}draw();raf=requestAnimationFrame(animate);}
+  window.addEventListener('resize',()=>{cancelAnimationFrame(raf);init();animate();});
+  init();animate();
+})();
+</script></body></html>
