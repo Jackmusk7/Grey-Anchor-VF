@@ -439,6 +439,26 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
   .page{overflow-x:hidden}
   .si{max-width:100%;box-sizing:border-box}
 }
+
+/* ═══ FIX GUIDE GRID MOBILE ═══ */
+@media(max-width:600px){
+  .guide-grid{grid-template-columns:1fr!important;width:100%;max-width:100%}
+  .guide-box{padding:1.25rem;overflow:hidden}
+}
+
+/* ═══ FIX ALGO CARDS MOBILE ═══ */
+@media(max-width:768px){
+  .agrid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:.7rem;
+    width:100%;
+    overflow:visible;
+  }
+  .agroup{overflow:visible!important;width:100%}
+  .acard-sm{width:100%;box-sizing:border-box}
+  #page-algos .si{overflow:visible}
+}
 </style></head><body><canvas id="bgc"></canvas>
 <div id="cart-overlay" onclick="closeCart()" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s"></div>
 <div id="cart-panel" style="position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#080d1a;border-left:1px solid rgba(255,255,255,.07);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column">
