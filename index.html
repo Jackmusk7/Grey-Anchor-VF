@@ -437,6 +437,7 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
 @media(max-width:768px){
   body{overflow-x:hidden}
   .page{overflow-x:hidden}
+  #page-algos{overflow-x:visible!important}
   .si{max-width:100%;box-sizing:border-box}
 }
 
@@ -450,13 +451,35 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
 
 
 
+
 @media(max-width:768px){
-  .agrid{grid-template-columns:1fr 1fr!important}
-  .acard-sm-name{font-size:.72rem}
-  .acard-sm-ret{font-size:1.1rem}
-}
-@media(max-width:380px){
-  .agrid{grid-template-columns:1fr!important}
+  /* Allow horizontal scroll to escape containers */
+  #page-algos,
+  #page-algos .si,
+  #page-algos .agroup{
+    overflow:visible!important;
+  }
+  /* The scroll wrapper */
+  .agrid{
+    display:flex!important;
+    flex-direction:row!important;
+    overflow-x:scroll!important;
+    overflow-y:visible!important;
+    -webkit-overflow-scrolling:touch!important;
+    scroll-snap-type:x mandatory!important;
+    gap:.65rem!important;
+    padding:0 1rem .75rem!important;
+    margin:0 -1rem!important;
+    width:calc(100% + 2rem)!important;
+    box-sizing:border-box!important;
+  }
+  .acard-sm{
+    flex:0 0 72vw!important;
+    max-width:72vw!important;
+    min-width:72vw!important;
+    scroll-snap-align:start!important;
+    box-sizing:border-box!important;
+  }
 }
 </style></head><body><canvas id="bgc"></canvas>
 <div id="cart-overlay" onclick="closeCart()" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s"></div>
@@ -676,7 +699,7 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
     <div style="display:flex;align-items:flex-start;gap:.65rem;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)"><span style="color:var(--teal);font-weight:600;flex-shrink:0">→</span><span style="font-size:.85rem;font-weight:500;color:rgba(255,255,255,.8);line-height:1.5">Combiner plusieurs algorithmes permet de couvrir différents régimes de marché et de lisser votre performance globale. Cliquez sur un modèle pour voir ses statistiques détaillées.</span></div>
   </div>
   <div class="agroup" style="margin-bottom:2rem">
-    <div class="agroup-title"><div class="agroup-bar" style="background:var(--teal)"></div><span class="agroup-label" style="color:var(--teal)">YM1, Dow Jones</span><span onclick="go('algos')" style="font-size:.68rem;color:var(--teal);opacity:.7;cursor:pointer;margin-left:auto;padding-left:.75rem;white-space:nowrap">Tous les modèles →</span></div>
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--teal)"></div><span class="agroup-label" style="color:var(--teal)">YM1, Dow Jones</span></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
       <div onclick="go('algo-alpha')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--teal);letter-spacing:.02em">ANCHOR-ALPHA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Jan 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+38.4%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">67.2%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.01</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-7.8%</div></div></div></div>
       <div onclick="go('algo-beta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--teal);letter-spacing:.02em">ANCHOR-BETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Mar 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+28.7%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">71.3%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.24</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-5.6%</div></div></div></div>
@@ -684,7 +707,7 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
     </div>
   </div>
   <div class="agroup" style="margin-bottom:2rem">
-    <div class="agroup-title"><div class="agroup-bar" style="background:var(--purple)"></div><span class="agroup-label" style="color:var(--purple)">NQ1, Nasdaq</span><span onclick="go('algos')" style="font-size:.68rem;color:var(--purple);opacity:.7;cursor:pointer;margin-left:auto;padding-left:.75rem;white-space:nowrap">Tous les modèles →</span></div>
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--purple)"></div><span class="agroup-label" style="color:var(--purple)">NQ1, Nasdaq</span></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
       <div onclick="go('algo-delta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.02em">ANCHOR-DELTA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Jan 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+44.6%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">65.8%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.92</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-9.1%</div></div></div></div>
       <div onclick="go('algo-epsilon')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--purple);letter-spacing:.02em">ANCHOR-EPSILON</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Avr 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+31.8%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">62.4%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.74</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-8.4%</div></div></div></div>
@@ -692,7 +715,7 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
     </div>
   </div>
   <div class="agroup" style="margin-bottom:2rem">
-    <div class="agroup-title"><div class="agroup-bar" style="background:var(--amber)"></div><span class="agroup-label" style="color:var(--amber)">ES1, S&amp;P 500</span><span onclick="go('algos')" style="font-size:.68rem;color:var(--amber);opacity:.7;cursor:pointer;margin-left:auto;padding-left:.75rem;white-space:nowrap">Tous les modèles →</span></div>
+    <div class="agroup-title"><div class="agroup-bar" style="background:var(--amber)"></div><span class="agroup-label" style="color:var(--amber)">ES1, S&amp;P 500</span></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
       <div onclick="go('algo-eta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--amber);letter-spacing:.02em">ANCHOR-ETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Fév 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+36.2%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">70.1%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">2.09</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-6.8%</div></div></div></div>
       <div onclick="go('algo-theta')" style="border-radius:1rem;padding:1.1rem;cursor:pointer;transition:all .25s;background:rgba(8,13,26,.72);border:1px solid rgba(255,255,255,.09)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem"><div><div style="font-size:.82rem;font-weight:600;color:var(--amber);letter-spacing:.02em">ANCHOR-THETA</div><div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:.15rem">Mai 2025</div></div><span style="font-size:.58rem;color:var(--teal)">● Actif</span></div><div style="font-size:1.4rem;font-weight:700;color:var(--teal);letter-spacing:-.03em;margin-bottom:.65rem">+27.9%</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;border-top:1px solid rgba(255,255,255,.04);padding-top:.65rem"><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Win Rate</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">61.8%</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">Sharpe</div><div style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.72)">1.61</div></div><div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.28);margin-bottom:.15rem">DD Max</div><div style="font-size:.8rem;font-weight:600;color:var(--red)">-11.3%</div></div></div></div>
