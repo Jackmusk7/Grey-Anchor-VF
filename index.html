@@ -463,7 +463,7 @@ h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:rgb
 .agroup-nav{display:none}
 @media(max-width:768px){
   .agroup-nav{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;margin-bottom:.65rem}
-  .anav-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);flex-shrink:0;transition:all .2s;-webkit-tap-highlight-color:transparent}
+  .anav-btn{width:36px;height:36px;border-radius:50%;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.35);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#00d4aa;flex-shrink:0;transition:all .2s;-webkit-tap-highlight-color:transparent}
   .anav-btn:active{background:rgba(255,255,255,.12)}
   .anav-btn.disabled{opacity:.25;pointer-events:none}
 }
@@ -1242,48 +1242,36 @@ function drawAlgoAnnual(id){var el=document.getElementById('annual-'+id);if(!el)
 function initAlgoPage(id){setTimeout(function(){drawAlgoEquity(id);drawAlgoAnnual(id);},120);}
 
 
-var aPages = {'agroup-ym1':0,'agroup-nq1':0,'agroup-es1':0};
-function aPrev(gid){
-  if(aPages[gid]<=0) return;
-  aPages[gid]--;
-  aRender(gid);
-}
-function aNext(gid){
-  var grid=document.getElementById(gid+'-grid');
-  if(!grid) return;
-  var cards=grid.querySelectorAll('.acard-sm');
-  var perPage=window.innerWidth<=768?2:3;
-  var maxPage=Math.ceil(cards.length/perPage)-1;
-  if(aPages[gid]>=maxPage) return;
-  aPages[gid]++;
-  aRender(gid);
-}
+var aPages={'agroup-ym1':0,'agroup-nq1':0,'agroup-es1':0};
 function aRender(gid){
   var grid=document.getElementById(gid+'-grid');
   var prev=document.getElementById(gid+'-prev');
   var next=document.getElementById(gid+'-next');
-  if(!grid) return;
+  if(!grid)return;
+  var mobile=window.innerWidth<=768;
+  var cards=Array.prototype.slice.call(grid.querySelectorAll('.acard-sm'));
+  var perPage=mobile?2:3;
+  var page=aPages[gid]||0;
+  var maxPage=Math.ceil(cards.length/perPage)-1;
+  cards.forEach(function(card,i){
+    card.style.display=(!mobile||(i>=page*perPage&&i<(page+1)*perPage))?'block':'none';
+  });
+  if(prev)prev.classList.toggle('disabled',page<=0);
+  if(next)next.classList.toggle('disabled',page>=maxPage);
+}
+function aPrev(gid){if((aPages[gid]||0)>0){aPages[gid]--;aRender(gid);}}
+function aNext(gid){
+  var grid=document.getElementById(gid+'-grid');
+  if(!grid)return;
   var cards=grid.querySelectorAll('.acard-sm');
   var perPage=window.innerWidth<=768?2:3;
-  var maxPage=Math.ceil(cards.length/perPage)-1;
-  var page=aPages[gid];
-  cards.forEach(function(card,i){
-    card.style.display=(i>=page*perPage&&i<(page+1)*perPage)?'':'none';
-  });
-  if(prev){prev.classList.toggle('disabled',page<=0);}
-  if(next){next.classList.toggle('disabled',page>=maxPage);}
+  var max=Math.ceil(cards.length/perPage)-1;
+  if((aPages[gid]||0)<max){aPages[gid]=((aPages[gid]||0)+1);aRender(gid);}
 }
 function initAgroups(){
-  if(window.innerWidth>768){
-    ['agroup-ym1','agroup-nq1','agroup-es1'].forEach(function(gid){
-      var grid=document.getElementById(gid+'-grid');
-      if(grid) grid.querySelectorAll('.acard-sm').forEach(function(c){c.style.display='';});
-    });
-  } else {
-    ['agroup-ym1','agroup-nq1','agroup-es1'].forEach(function(gid){aPages[gid]=0;aRender(gid);});
-  }
+  ['agroup-ym1','agroup-nq1','agroup-es1'].forEach(function(gid){aPages[gid]=0;aRender(gid);});
 }
-window.addEventListener('resize', initAgroups);
+window.addEventListener('resize',function(){initAgroups();});
 
 // ROUTER
 function go(page){
@@ -1295,6 +1283,9 @@ function go(page){
     if(a.id==='nl-'+page)a.classList.add('active');
   });
   window.scrollTo(0,0);
+  if(page==='algos'){setTimeout(initAgroups,80);}
+  if(page==='dashboard'){setTimeout(renderDashboard,80);}
+  if(page.indexOf('algo-')===0){setTimeout(function(){initAlgoPage(page.slice(5));},80);}
   // Re-trigger reveals
   setTimeout(()=>{
     document.querySelectorAll('.page.active .rv').forEach(el=>{
